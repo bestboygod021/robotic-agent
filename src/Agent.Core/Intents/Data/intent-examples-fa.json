@@ -1,0 +1,378 @@
+[
+  {
+    "intent": "CopyFiles",
+    "text": "فایل ها را کپی کن"
+  },
+  {
+    "intent": "CopyFiles",
+    "text": "لطفا فایل های pdf رو کپی کن"
+  },
+  {
+    "intent": "CopyFiles",
+    "text": "از فایل ها کپی بگیر"
+  },
+  {
+    "intent": "CopyFiles",
+    "text": "از این فایل ها یه نسخه بگیر"
+  },
+  {
+    "intent": "CopyFiles",
+    "text": "یه کپی از پوشه بساز"
+  },
+  {
+    "intent": "CopyFiles",
+    "text": "عکس ها رو کپی کن"
+  },
+  {
+    "intent": "CopyFiles",
+    "text": "اسناد را کپی کن"
+  },
+  {
+    "intent": "CopyFiles",
+    "text": "فایل pdf را کپی کن"
+  },
+  {
+    "intent": "CopyFiles",
+    "text": "همه فایل ها را کپی کن"
+  },
+  {
+    "intent": "CopyFiles",
+    "text": "یک نسخه از این فایل تهیه کن"
+  },
+  {
+    "intent": "CopyFiles",
+    "text": "از پوشه دانلود کپی بگیر"
+  },
+  {
+    "intent": "CopyFiles",
+    "text": "این عکس ها را کپی کن"
+  },
+  {
+    "intent": "CopyFiles",
+    "text": "کپی فایل های متنی"
+  },
+  {
+    "intent": "CopyFiles",
+    "text": "می خواهم فایلها را کپی کنم"
+  },
+  {
+    "intent": "CopyFiles",
+    "text": "فایل های کاری را تکثیر کن"
+  },
+  {
+    "intent": "CopyFiles",
+    "text": "make a copy of these files"
+  },
+  {
+    "intent": "CopyFiles",
+    "text": "copy the pdf files"
+  },
+  {
+    "intent": "CopyFiles",
+    "text": "copy these documents"
+  },
+  {
+    "intent": "CopyFiles",
+    "text": "duplicate the files"
+  },
+  {
+    "intent": "CopyFiles",
+    "text": "please copy files"
+  },
+  {
+    "intent": "CopyFiles",
+    "text": "backup these documents"
+  },
+  {
+    "intent": "CopyFiles",
+    "text": "از فایل های دانلود شده نسخه بردار"
+  },
+  {
+    "intent": "CopyFiles",
+    "text": "برای فایل ها یک کپی بساز"
+  },
+  {
+    "intent": "CopyFiles",
+    "text": "این سندها را کپی کن"
+  },
+  {
+    "intent": "MoveFiles",
+    "text": "فایل ها را جابه جا کن"
+  },
+  {
+    "intent": "MoveFiles",
+    "text": "فایل ها رو انتقال بده"
+  },
+  {
+    "intent": "MoveFiles",
+    "text": "این فایل ها را منتقل کن"
+  },
+  {
+    "intent": "MoveFiles",
+    "text": "انتقال فایل pdf"
+  },
+  {
+    "intent": "MoveFiles",
+    "text": "move the files"
+  },
+  {
+    "intent": "MoveFiles",
+    "text": "move these documents"
+  },
+  {
+    "intent": "MoveFiles",
+    "text": "جابجایی عکس ها"
+  },
+  {
+    "intent": "MoveFiles",
+    "text": "فایل را به پوشه مقصد ببر"
+  },
+  {
+    "intent": "MoveFiles",
+    "text": "فایل ها را ببر به پوشه اسناد"
+  },
+  {
+    "intent": "MoveFiles",
+    "text": "relocate the documents"
+  },
+  {
+    "intent": "MoveFiles",
+    "text": "transfer these files"
+  },
+  {
+    "intent": "MoveFiles",
+    "text": "فایل های قدیمی را منتقل کن"
+  },
+  {
+    "intent": "DeleteFiles",
+    "text": "فایل ها را حذف کن"
+  },
+  {
+    "intent": "DeleteFiles",
+    "text": "فایل ها رو پاک کن"
+  },
+  {
+    "intent": "DeleteFiles",
+    "text": "پاکسازی پوشه دانلود"
+  },
+  {
+    "intent": "DeleteFiles",
+    "text": "فایل pdf را پاک کن"
+  },
+  {
+    "intent": "DeleteFiles",
+    "text": "delete the files"
+  },
+  {
+    "intent": "DeleteFiles",
+    "text": "remove these documents"
+  },
+  {
+    "intent": "DeleteFiles",
+    "text": "erase these files"
+  },
+  {
+    "intent": "DeleteFiles",
+    "text": "delete pdf files"
+  },
+  {
+    "intent": "DeleteFiles",
+    "text": "حذف فایل های دانلود"
+  },
+  {
+    "intent": "DeleteFiles",
+    "text": "فایل های اضافه را پاک کن"
+  },
+  {
+    "intent": "DeleteFiles",
+    "text": "trash the old files"
+  },
+  {
+    "intent": "DeleteFiles",
+    "text": "فایل ها را دور بریز"
+  },
+  {
+    "intent": "OpenApp",
+    "text": "برنامه را باز کن"
+  },
+  {
+    "intent": "OpenApp",
+    "text": "ماشین حساب را اجرا کن"
+  },
+  {
+    "intent": "OpenApp",
+    "text": "notepad را باز کن"
+  },
+  {
+    "intent": "OpenApp",
+    "text": "launch calculator"
+  },
+  {
+    "intent": "OpenApp",
+    "text": "open notepad"
+  },
+  {
+    "intent": "OpenApp",
+    "text": "برنامه اکسل را اجرا کن"
+  },
+  {
+    "intent": "OpenApp",
+    "text": "مرورگر را باز کن"
+  },
+  {
+    "intent": "OpenApp",
+    "text": "باز کردن برنامه"
+  },
+  {
+    "intent": "OpenApp",
+    "text": "start the browser"
+  },
+  {
+    "intent": "OpenApp",
+    "text": "run calculator"
+  },
+  {
+    "intent": "OpenApp",
+    "text": "word را باز کن"
+  },
+  {
+    "intent": "OpenApp",
+    "text": "برنامه paint را اجرا کن"
+  },
+  {
+    "intent": "Other",
+    "text": "سلام خوبی"
+  },
+  {
+    "intent": "Other",
+    "text": "ساعت چنده"
+  },
+  {
+    "intent": "Other",
+    "text": "چطوری"
+  },
+  {
+    "intent": "Other",
+    "text": "این متن را خلاصه کن"
+  },
+  {
+    "intent": "Other",
+    "text": "به من کمک کن"
+  },
+  {
+    "intent": "Other",
+    "text": "کامپیوتر کند است"
+  },
+  {
+    "intent": "Other",
+    "text": "ممنون از راهنمایی"
+  },
+  {
+    "intent": "Other",
+    "text": "thank you"
+  },
+  {
+    "intent": "Other",
+    "text": "how are you"
+  },
+  {
+    "intent": "Other",
+    "text": "what is the weather"
+  },
+  {
+    "intent": "Other",
+    "text": "tell me a joke"
+  },
+  {
+    "intent": "Other",
+    "text": "turn on bluetooth"
+  },
+  {
+    "intent": "Other",
+    "text": "تنظیمات ویندوز را نشان بده"
+  },
+  {
+    "intent": "Other",
+    "text": "فایل ها چند تا هستند"
+  },
+  {
+    "intent": "Other",
+    "text": "همه فایل ها را نشان بده"
+  },
+  {
+    "intent": "Other",
+    "text": "همه فایل ها کجا هستند"
+  },
+  {
+    "intent": "Other",
+    "text": "فایل های pdf را مرتب کن"
+  },
+  {
+    "intent": "Other",
+    "text": "فایل های دانلود را مرتب کن"
+  },
+  {
+    "intent": "Other",
+    "text": "فایل های pdf را ذخیره کن"
+  },
+  {
+    "intent": "Other",
+    "text": "فایل ها را پیدا کن"
+  },
+  {
+    "intent": "Other",
+    "text": "فایل های متنی را فهرست کن"
+  },
+  {
+    "intent": "Other",
+    "text": "محتوای فایل را باز کن"
+  },
+  {
+    "intent": "Other",
+    "text": "همه فایل ها را بررسی کن"
+  },
+  {
+    "intent": "Other",
+    "text": "فایل ها را سازمان دهی کن"
+  },
+  {
+    "intent": "Other",
+    "text": "فایل ها را دسته بندی کن"
+  },
+  {
+    "intent": "Other",
+    "text": "چه تعداد فایل دارم"
+  },
+  {
+    "intent": "Other",
+    "text": "list files in downloads"
+  },
+  {
+    "intent": "Other",
+    "text": "sort the pdf files"
+  },
+  {
+    "intent": "Other",
+    "text": "organize these files"
+  },
+  {
+    "intent": "Other",
+    "text": "show me the files"
+  },
+  {
+    "intent": "Other",
+    "text": "save the pdf file"
+  },
+  {
+    "intent": "Other",
+    "text": "open this document"
+  },
+  {
+    "intent": "Other",
+    "text": "do not copy the files"
+  },
+  {
+    "intent": "Other",
+    "text": "فایل ها را کپی نکن"
+  }
+]
