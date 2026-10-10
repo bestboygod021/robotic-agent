@@ -1,18 +1,2 @@
-# .NET build output
-**/bin/
-**/obj/
-.vs/
-
-# Local model files and user data (never commit models or histories)
-models/
-*.gguf
-*.safetensors
-*.onnx
-history.json
-.robotic-agent-*.tmp
-
-# Local IDE and OS files
-.idea/
-.vscode/
-.DS_Store
-Thumbs.db
+node_modules/
+dist/
