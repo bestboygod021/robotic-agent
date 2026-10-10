@@ -1,0 +1,232 @@
+<Window x:Class="Agent.Desktop.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="رباتیک ایجنت | دستیار محلی ویندوز"
+        Width="1100" Height="740" MinWidth="850" MinHeight="640"
+        WindowStartupLocation="CenterScreen"
+        FlowDirection="RightToLeft"
+        FontFamily="Segoe UI"
+        Background="{StaticResource PageBrush}">
+    <Window.Resources>
+        <Style x:Key="PrimaryButton" TargetType="Button">
+            <Setter Property="Padding" Value="18,10" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="Background" Value="{StaticResource AccentBrush}" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Margin" Value="0,0,8,0" />
+        </Style>
+        <Style x:Key="SecondaryButton" TargetType="Button">
+            <Setter Property="Padding" Value="14,9" />
+            <Setter Property="FontSize" Value="13" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Foreground" Value="#344054" />
+            <Setter Property="Background" Value="#F2F4F7" />
+            <Setter Property="BorderBrush" Value="#E4E7EC" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Margin" Value="0,0,8,0" />
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="Padding" Value="11,9" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="Foreground" Value="#182230" />
+            <Setter Property="Background" Value="White" />
+            <Setter Property="BorderBrush" Value="#D0D5DD" />
+            <Setter Property="BorderThickness" Value="1" />
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="FontFamily" Value="Segoe UI" />
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="76" />
+            <RowDefinition Height="18" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="12" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Background="White" CornerRadius="16" Padding="20,14" BorderBrush="#EAECF0" BorderThickness="1">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                    <TextBlock Text="رباتیک ایجنت" FontSize="22" FontWeight="Bold" Foreground="{StaticResource InkBrush}" />
+                    <TextBlock Text="دستیار خودکارسازی محلی ویندوز" FontSize="12" Foreground="{StaticResource MutedBrush}" Margin="0,3,0,0" />
+                </StackPanel>
+                <Border Grid.Column="1" Background="#ECFDF3" BorderBrush="#ABEFC6" BorderThickness="1" CornerRadius="18" Padding="12,7" VerticalAlignment="Center">
+                    <StackPanel Orientation="Horizontal">
+                        <Ellipse Width="8" Height="8" Fill="#12B76A" VerticalAlignment="Center" Margin="0,0,7,0" />
+                        <TextBlock Text="محلی و آفلاین" Foreground="#027A48" FontSize="12" FontWeight="SemiBold" />
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </Border>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1.45*" />
+                <ColumnDefinition Width="14" />
+                <ColumnDefinition Width="0.9*" />
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0" Background="White" CornerRadius="16" Padding="22" BorderBrush="#EAECF0" BorderThickness="1">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel>
+                        <TextBlock Text="یک کار ساده را خودکار کن" FontSize="21" FontWeight="Bold" Foreground="{StaticResource InkBrush}" />
+                        <TextBlock Text="فایل‌ها فقط پس از پیش‌نمایش و تأیید کپی می‌شوند؛ بازکردن برنامه فقط از فهرست ثابت و با اجازهٔ شما انجام می‌شود." TextWrapping="Wrap" FontSize="13" Foreground="{StaticResource MutedBrush}" Margin="0,7,0,16" />
+
+                        <TextBlock Text="درخواست" FontSize="13" FontWeight="SemiBold" Foreground="#344054" Margin="0,0,0,6" />
+                        <TextBox x:Name="RequestTextBox" Height="72" AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Text="فایل‌های PDF را کپی کن" MaxLength="512" TextChanged="RequestTextChanged" />
+                        <TextBlock Text="مثال: «فایل‌های PDF را کپی کن» یا «همهٔ فایل‌ها را کپی کن». انتخاب پوشه‌ها جداگانه انجام می‌شود." FontSize="11" Foreground="{StaticResource MutedBrush}" TextWrapping="Wrap" Margin="0,5,0,9" />
+                        <Button x:Name="ParseButton" Content="تحلیل درخواست" Style="{StaticResource SecondaryButton}" HorizontalAlignment="Right" Click="ParseButton_Click" />
+
+                        <Separator Margin="0,16,0,16" Background="#EAECF0" />
+
+                        <TextBlock Text="پوشه‌های مجاز برای این اجرا" FontSize="14" FontWeight="Bold" Foreground="{StaticResource InkBrush}" Margin="0,0,0,10" />
+                        <Grid Margin="0,0,0,8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="پوشهٔ مبدأ" VerticalAlignment="Center" FontSize="12" Foreground="#475467" />
+                            <TextBlock x:Name="SourcePathText" Grid.Column="1" Text="انتخاب نشده" TextTrimming="CharacterEllipsis" ToolTip="" VerticalAlignment="Center" Margin="8,0" FontSize="12" Foreground="{StaticResource MutedBrush}" />
+                            <Button x:Name="SourceButton" Grid.Column="2" Content="انتخاب" Style="{StaticResource SecondaryButton}" Margin="0" Click="SourceButton_Click" />
+                        </Grid>
+                        <Grid Margin="0,0,0,12">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="پوشهٔ مقصد" VerticalAlignment="Center" FontSize="12" Foreground="#475467" />
+                            <TextBlock x:Name="DestinationPathText" Grid.Column="1" Text="انتخاب نشده" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" Margin="8,0" FontSize="12" Foreground="{StaticResource MutedBrush}" />
+                            <Button x:Name="DestinationButton" Grid.Column="2" Content="انتخاب" Style="{StaticResource SecondaryButton}" Margin="0" Click="DestinationButton_Click" />
+                        </Grid>
+
+                        <Grid Margin="0,0,0,14">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100" />
+                                <ColumnDefinition Width="150" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="پسوند فایل" VerticalAlignment="Center" FontSize="12" Foreground="#475467" />
+                            <TextBox x:Name="ExtensionTextBox" Grid.Column="1" Height="38" TextChanged="PlanInput_TextChanged" />
+                            <TextBlock Grid.Column="2" Text="pdf یا *؛ مقدار دستی، پسوندِ تشخیص‌داده‌شده را جایگزین می‌کند." VerticalAlignment="Center" Margin="10,0,0,0" FontSize="11" Foreground="{StaticResource MutedBrush}" />
+                        </Grid>
+
+                        <WrapPanel>
+                            <Button x:Name="PreviewButton" Content="ساخت پیش‌نمایش" Style="{StaticResource PrimaryButton}" Click="PreviewButton_Click" />
+                            <Button x:Name="ExecuteButton" Content="تأیید و کپی" Style="{StaticResource SecondaryButton}" IsEnabled="False" Click="ExecuteButton_Click" />
+                            <Button x:Name="CancelButton" Content="توقف" Style="{StaticResource SecondaryButton}" IsEnabled="False" Click="CancelButton_Click" />
+                        </WrapPanel>
+
+                        <Border Background="#F8F9FC" CornerRadius="10" Padding="12" Margin="0,14,0,0">
+                            <StackPanel>
+                                <TextBlock x:Name="PreviewSummaryText" Text="هنوز پیش‌نمایشی ساخته نشده است." FontSize="12" Foreground="#475467" TextWrapping="Wrap" />
+                                <ProgressBar x:Name="CopyProgressBar" Height="7" Margin="0,10,0,5" Minimum="0" Maximum="100" Visibility="Collapsed" />
+                                <TextBlock x:Name="StatusText" Text="آماده؛ هیچ اطلاعاتی به سرور ارسال نمی‌شود." FontSize="11" Foreground="{StaticResource MutedBrush}" TextWrapping="Wrap" />
+                            </StackPanel>
+                        </Border>
+
+                        <TextBlock Text="فهرست فایل‌های پیش‌نمایش" FontSize="13" FontWeight="Bold" Foreground="{StaticResource InkBrush}" Margin="0,17,0,7" />
+                        <ListBox x:Name="PreviewList" Height="185" BorderBrush="#EAECF0" Background="#FFFFFF" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Margin="2,4">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel>
+                                            <TextBlock Text="{Binding Name}" FontSize="12" Foreground="#344054" TextTrimming="CharacterEllipsis" />
+                                            <TextBlock Text="{Binding SizeLabel}" FontSize="10" Foreground="{StaticResource MutedBrush}" Margin="0,2,0,0" />
+                                        </StackPanel>
+                                        <TextBlock Grid.Column="1" Text="{Binding StatusLabel}" FontSize="10" Foreground="{Binding StatusColor}" VerticalAlignment="Center" Margin="8,0,0,0" />
+                                    </Grid>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+
+                        <Separator Margin="0,18,0,15" Background="#EAECF0" />
+                        <TextBlock Text="بازکردن برنامهٔ مجاز" FontSize="14" FontWeight="Bold" Foreground="{StaticResource InkBrush}" />
+                        <TextBlock Text="فقط برنامه‌های ثابتِ موجود در ویندوز باز می‌شوند؛ مسیر و فرمان دلخواه پذیرفته نمی‌شود." FontSize="11" Foreground="{StaticResource MutedBrush}" TextWrapping="Wrap" Margin="0,5,0,9" />
+                        <ComboBox x:Name="AppPicker" Height="54" Padding="10,5" IsEnabled="False" SelectionChanged="AppPicker_SelectionChanged">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Margin="0,3">
+                                        <TextBlock Text="{Binding DisplayName}" FontSize="12" FontWeight="SemiBold" Foreground="#344054" />
+                                        <TextBlock Text="{Binding Description}" FontSize="10" Foreground="{StaticResource MutedBrush}" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                        <WrapPanel Margin="0,10,0,0">
+                            <Button x:Name="LaunchAppButton" Content="بازکردن پس از تأیید" Style="{StaticResource SecondaryButton}" IsEnabled="False" Click="LaunchAppButton_Click" />
+                            <TextBlock x:Name="AppAvailabilityText" Text="در حال بررسی برنامه‌های مجاز..." FontSize="11" Foreground="{StaticResource MutedBrush}" VerticalAlignment="Center" />
+                        </WrapPanel>
+
+                        <Separator Margin="0,18,0,15" Background="#EAECF0" />
+                        <TextBlock Text="تنظیم بودجهٔ منابع دستگاه" FontSize="14" FontWeight="Bold" Foreground="{StaticResource InkBrush}" />
+                        <TextBlock Text="مقادیر سخت‌افزار فقط از رابط‌های در دسترس ویندوز خوانده می‌شوند؛ دما و توان PSU ممکن است نامشخص باشند. سقف سختِ عامل قابل‌عبور نیست." FontSize="11" Foreground="{StaticResource MutedBrush}" TextWrapping="Wrap" Margin="0,5,0,9" />
+                        <TextBlock x:Name="HardwareSummaryText" Text="در حال شناسایی سخت‌افزار..." FontSize="11" Foreground="#475467" TextWrapping="Wrap" Margin="0,0,0,10" />
+
+                        <TextBlock x:Name="ResourceIntensityLabel" Text="شدت کلی: در انتظار شناسایی" FontSize="12" FontWeight="SemiBold" Foreground="#344054" />
+                        <Slider x:Name="ResourceIntensitySlider" Minimum="0" Maximum="100" Value="50" IsEnabled="False" Margin="0,2,0,8" ValueChanged="ResourceIntensitySlider_ValueChanged" />
+                        <TextBlock Text="سهم اولویت‌ها جمعاً ۱۰۰٪ است؛ با افزایش هر سهم، دو سهم دیگر خودکار بازتوزیع می‌شوند." FontSize="10" Foreground="{StaticResource MutedBrush}" TextWrapping="Wrap" Margin="0,0,0,6" />
+                        <TextBlock x:Name="CpuShareLabel" Text="CPU: 40٪" FontSize="11" Foreground="#475467" />
+                        <Slider x:Name="CpuShareSlider" Tag="Cpu" Minimum="0" Maximum="100" Value="40" IsEnabled="False" Margin="0,0,0,5" ValueChanged="ResourceMixSlider_ValueChanged" />
+                        <TextBlock x:Name="MemoryShareLabel" Text="RAM: 40٪" FontSize="11" Foreground="#475467" />
+                        <Slider x:Name="MemoryShareSlider" Tag="Memory" Minimum="0" Maximum="100" Value="40" IsEnabled="False" Margin="0,0,0,5" ValueChanged="ResourceMixSlider_ValueChanged" />
+                        <TextBlock x:Name="DiskShareLabel" Text="دیسک: 20٪" FontSize="11" Foreground="#475467" />
+                        <Slider x:Name="DiskShareSlider" Tag="DiskIo" Minimum="0" Maximum="100" Value="20" IsEnabled="False" Margin="0,0,0,5" ValueChanged="ResourceMixSlider_ValueChanged" />
+                        <TextBlock x:Name="ResourceBudgetSummaryText" Text="بودجهٔ مؤثر پس از شناسایی نمایش داده می‌شود." FontSize="11" Foreground="{StaticResource MutedBrush}" TextWrapping="Wrap" Margin="0,5,0,8" />
+                        <Button x:Name="SaveResourceSettingsButton" Content="ذخیرهٔ تنظیمات منابع" Style="{StaticResource SecondaryButton}" IsEnabled="False" HorizontalAlignment="Right" Click="SaveResourceSettingsButton_Click" />
+                    </StackPanel>
+                </ScrollViewer>
+            </Border>
+
+            <Border Grid.Column="2" Background="White" CornerRadius="16" Padding="20" BorderBrush="#EAECF0" BorderThickness="1">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="فعالیت‌های اخیر" FontSize="18" FontWeight="Bold" Foreground="{StaticResource InkBrush}" />
+                    <TextBlock Grid.Row="1" Text="نام کار و نتیجهٔ کوتاه ثبت می‌شود؛ مسیر فایل‌ها یا آرگومان برنامه ذخیره نمی‌شود." TextWrapping="Wrap" FontSize="11" Foreground="{StaticResource MutedBrush}" Margin="0,6,0,14" />
+                    <ListBox x:Name="HistoryList" Grid.Row="2" BorderThickness="0" Background="Transparent" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Border BorderBrush="#EAECF0" BorderThickness="0,0,0,1" Padding="0,11">
+                                    <StackPanel>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="Auto" />
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Text="{Binding Operation}" FontWeight="SemiBold" FontSize="12" Foreground="#344054" />
+                                            <TextBlock Grid.Column="1" Text="{Binding LocalTime}" FontSize="10" Foreground="{StaticResource MutedBrush}" />
+                                        </Grid>
+                                        <TextBlock Text="{Binding Summary}" FontSize="10" Foreground="{StaticResource MutedBrush}" Margin="0,5,0,0" TextWrapping="Wrap" />
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <Button x:Name="ClearHistoryButton" Grid.Row="3" Content="پاک‌کردن تاریخچهٔ محلی" Style="{StaticResource SecondaryButton}" HorizontalAlignment="Right" Margin="0,14,0,0" Click="ClearHistoryButton_Click" />
+                </Grid>
+            </Border>
+        </Grid>
+
+        <TextBlock Grid.Row="4" Text="نسخهٔ آغازین • کپی امن فایل • اجرای برنامهٔ مجاز • دسته‌بند محلی • بدون مدل زبانی مولد یا شبکه" HorizontalAlignment="Center" FontSize="10" Foreground="#98A2B3" />
+    </Grid>
+</Window>
