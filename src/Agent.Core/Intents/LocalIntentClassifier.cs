@@ -1,3 +1,4 @@
+using Agent.Core.Localization;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 
@@ -16,8 +17,9 @@ public sealed record IntentClassification(IntentLabel Label, double Confidence, 
 
 /// <summary>
 /// A tiny, dependency-free multinomial Naive Bayes classifier over word and
-/// character n-grams. It is trained only from bundled examples and never learns
-/// from user files or sends text off-device.
+/// character n-grams. It is trained only from bundled multilingual examples
+/// (Persian, English, Simplified Chinese, Spanish, Arabic, and French) and
+/// never learns from user files or sends text off-device.
 /// </summary>
 public sealed class LocalIntentClassifier
 {
@@ -26,6 +28,7 @@ public sealed class LocalIntentClassifier
     private const int MaximumTextLength = 512;
     private static readonly int[] CharacterNgramLengths = [2, 3, 4];
     private static readonly Regex WordPattern = new(@"[\p{L}\p{N}]+", RegexOptions.Compiled | RegexOptions.CultureInvariant);
+    private static readonly Regex CjkRunPattern = new(@"[\u4e00-\u9fff]{2,}", RegexOptions.Compiled | RegexOptions.CultureInvariant);
     private static readonly JsonSerializerOptions JsonOptions = new() { PropertyNameCaseInsensitive = true };
 
     private readonly IntentLabel[] _labels = Enum.GetValues<IntentLabel>();
@@ -39,6 +42,8 @@ public sealed class LocalIntentClassifier
         TrainFromBundledExamples();
     }
 
+    public int ExampleCount => _exampleCount;
+
     public IntentClassification Classify(string? text)
     {
         var input = text ?? string.Empty;
@@ -47,7 +52,7 @@ public sealed class LocalIntentClassifier
             input = input[..MaximumTextLength];
         }
 
-        var normalized = IntentRouter.NormalizePersian(input);
+        var normalized = TextNormalizer.NormalizeMultilingual(input);
 
         var features = ExtractFeatures(normalized);
         if (features.Count == 0 || _exampleCount == 0)
@@ -109,7 +114,7 @@ public sealed class LocalIntentClassifier
                 throw new InvalidOperationException($"برچسب نامعتبر در دادهٔ دسته‌بند: {example.Intent}");
             }
 
-            var normalized = IntentRouter.NormalizePersian(example.Text);
+            var normalized = TextNormalizer.NormalizeMultilingual(example.Text);
             foreach (var (feature, frequency) in ExtractFeatures(normalized))
             {
                 _featureCounts[label].TryGetValue(feature, out var currentCount);
@@ -141,6 +146,20 @@ public sealed class LocalIntentClassifier
             }
         }
 
+        // For Chinese (and unspaced CJK segments), emit character bigrams and trigrams directly.
+        foreach (Match cjkMatch in CjkRunPattern.Matches(normalizedText))
+        {
+            var run = cjkMatch.Value;
+            for (var index = 0; index < run.Length; index++)
+            {
+                AddFeature(features, $"cjk1:{run[index]}");
+                if (index + 1 < run.Length)
+                {
+                    AddFeature(features, $"cjk2:{run.Substring(index, 2)}");
+                }
+            }
+        }
+
         return features;
     }
 
@@ -149,7 +168,6 @@ public sealed class LocalIntentClassifier
         features.TryGetValue(feature, out var currentCount);
         features[feature] = currentCount + 1;
     }
-
 }
 
 public sealed record IntentTrainingExample(string Intent, string Text);

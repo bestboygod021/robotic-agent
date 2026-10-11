@@ -8,5 +8,11 @@
     <EmbeddedResource Include="Intents/Data/intent-examples-fa.json">
       <LogicalName>Agent.Core.Intents.Data.intent-examples-fa.json</LogicalName>
     </EmbeddedResource>
+    <EmbeddedResource Include="Localization/Data/ui-strings.json">
+      <LogicalName>Agent.Core.Localization.Data.ui-strings.json</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools/Data/ai-tools-fa.json">
+      <LogicalName>Agent.Core.Tools.Data.ai-tools-fa.json</LogicalName>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

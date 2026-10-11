@@ -1,12 +1,15 @@
 using Agent.Core.Intents;
+using Agent.Core.Localization;
 using Agent.Core.Skills;
 using Agent.Core.Resources;
 using Agent.Core.Storage;
+using Agent.Desktop.ViewModels;
 using Microsoft.Win32;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Globalization;
 using System.Windows;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Threading;
 
@@ -14,6 +17,7 @@ namespace Agent.Desktop;
 
 public partial class MainWindow : Window
 {
+    private readonly MainViewModel _viewModel = new();
     private readonly IntentRouter _intentRouter = new();
     private readonly FileCopySkill _copySkill = new();
     private readonly WindowsAppLauncher _appLauncher = new();
@@ -40,11 +44,14 @@ public partial class MainWindow : Window
     private bool _isBusy;
     private bool _isPreparingCopyExecution;
     private bool _closeAfterCancellation;
+    private bool _suppressLanguageChange;
 
     public MainWindow()
     {
         _hardwareProbe = new WindowsHardwareProbe(_systemResourceMonitor);
         InitializeComponent();
+        LanguageComboBox.ItemsSource = _viewModel.Languages;
+        SyncLanguageChrome();
         PreviewList.ItemsSource = _previewRows;
         HistoryList.ItemsSource = _historyRows;
         Loaded += MainWindow_Loaded;
@@ -54,6 +61,16 @@ public partial class MainWindow : Window
 
     private async void MainWindow_Loaded(object sender, RoutedEventArgs e)
     {
+        try
+        {
+            await _viewModel.InitializeLanguagePreferenceAsync();
+            SyncLanguageChrome();
+        }
+        catch (Exception)
+        {
+            SyncLanguageChrome();
+        }
+
         try
         {
             LoadAvailableApps();
@@ -103,6 +120,101 @@ public partial class MainWindow : Window
         AppPicker.SelectedIndex = 0;
         LaunchAppButton.IsEnabled = AppPicker.SelectedItem is AppDefinition;
         AppAvailabilityText.Text = "برنامهٔ انتخابی با تأیید شما، بدون فرمان یا دسترسی مدیر باز می‌شود.";
+    }
+
+    private void AiToolsButton_Click(object sender, RoutedEventArgs e)
+    {
+        var catalogWindow = new AiToolsWindow { Owner = this };
+        catalogWindow.ShowDialog();
+        SyncLanguageChrome();
+    }
+
+    private void UserGuideButton_Click(object sender, RoutedEventArgs e)
+    {
+        var guideWindow = new UserGuideWindow(_viewModel.CurrentLanguageCode) { Owner = this };
+        guideWindow.ShowDialog();
+    }
+
+    private void WorkflowStudioButton_Click(object sender, RoutedEventArgs e)
+    {
+        var studioWindow = new WorkflowStudioWindow(_viewModel.CurrentLanguageCode) { Owner = this };
+        studioWindow.ShowDialog();
+    }
+
+    private async void LanguageComboBox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+    {
+        if (_suppressLanguageChange || LanguageComboBox.SelectedItem is not SupportedLanguage selected)
+        {
+            return;
+        }
+
+        _viewModel.SelectedLanguage = selected;
+        SyncLanguageChrome();
+        try
+        {
+            await _viewModel.SaveLanguagePreferenceAsync();
+        }
+        catch (Exception)
+        {
+            // Language preference remains active in memory even if disk write fails.
+        }
+    }
+
+    private void SyncLanguageChrome()
+    {
+        _suppressLanguageChange = true;
+        try
+        {
+            LanguageComboBox.SelectedValue = _viewModel.CurrentLanguageCode;
+        }
+        finally
+        {
+            _suppressLanguageChange = false;
+        }
+
+        FlowDirection = _viewModel.IsRightToLeft ? FlowDirection.RightToLeft : FlowDirection.LeftToRight;
+        FontFamily = new FontFamily(_viewModel.RecommendedFontFamily);
+        Title = _viewModel.WindowTitle;
+        AppHeaderTitleText.Text = _viewModel.WindowTitle;
+        AppHeaderSubtitleText.Text = _viewModel.HeaderSubtitle;
+        LanguageLabelText.Text = _viewModel.LanguagePickerLabel;
+        AiToolsButton.Content = _viewModel.OpenAiCatalogButtonText;
+    }
+
+    private async void MainWindow_PreviewKeyDown(object sender, KeyEventArgs e)
+    {
+        if (e.Key == Key.F1)
+        {
+            UserGuideButton_Click(this, new RoutedEventArgs());
+            e.Handled = true;
+            return;
+        }
+
+        if ((Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
+        {
+            if (e.Key == Key.L)
+            {
+                _viewModel.CycleNextLanguage();
+                SyncLanguageChrome();
+                try
+                {
+                    await _viewModel.SaveLanguagePreferenceAsync();
+                }
+                catch (Exception)
+                {
+                    // Ignore preference persistence failure during hotkey cycle.
+                }
+
+                e.Handled = true;
+                return;
+            }
+
+            if (e.Key == Key.K && AiToolsButton.IsEnabled)
+            {
+                AiToolsButton_Click(this, new RoutedEventArgs());
+                e.Handled = true;
+            }
+        }
     }
 
     private void AppPicker_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
@@ -419,6 +531,9 @@ public partial class MainWindow : Window
             }
 
             _currentRequest = null;
+            _viewModel.LastRollbackManifest = result.RollbackManifest;
+            UndoLastButton.IsEnabled = _viewModel.CanUndoLastOperation;
+            _currentRequest = null;
             _currentPreview = null;
             ExecuteButton.IsEnabled = false;
         }
@@ -500,6 +615,50 @@ public partial class MainWindow : Window
         }
     }
 
+    private void PlanOption_Changed(object sender, RoutedEventArgs e)
+    {
+        if (IsInitialized && ExecuteButton is not null)
+        {
+            InvalidatePreview();
+        }
+    }
+
+    private async void UndoLastButton_Click(object sender, RoutedEventArgs e)
+    {
+        if (!_viewModel.CanUndoLastOperation)
+        {
+            SetStatus("عملیات قابل بازگردانی وجود ندارد.", isError: true);
+            return;
+        }
+
+        SetBusy(true);
+        try
+        {
+            var rollbackResult = await _viewModel.UndoLastOperationAsync();
+            UndoLastButton.IsEnabled = _viewModel.CanUndoLastOperation;
+            await _historyStore.AddAsync(new HistoryEntry(
+                DateTimeOffset.UtcNow,
+                "واگرد آخرین عملیات (Undo)",
+                rollbackResult.RevertedCount,
+                rollbackResult.SkippedCount,
+                rollbackResult.Warnings.Count,
+                Cancelled: false,
+                Detail: "فایل‌های ایجادشده با بررسی هش SHA-256 به حالت پیشین بازگردانده شدند."));
+            await RefreshHistoryAsync();
+
+            SetStatus($"واگرد انجام شد: {rollbackResult.RevertedCount} مورد بازگردانی شد، {rollbackResult.SkippedCount} مورد رد شد.");
+        }
+        catch (Exception exception)
+        {
+            SetStatus(ToFriendlyMessage(exception), isError: true);
+        }
+        finally
+        {
+            SetBusy(false);
+            UndoLastButton.IsEnabled = _viewModel.CanUndoLastOperation;
+        }
+    }
+
     private bool TryCreateRequest(out FileCopyRequest request, out string error)
     {
         request = null!;
@@ -528,7 +687,19 @@ public partial class MainWindow : Window
             return false;
         }
 
-        request = new FileCopyRequest(_sourceDirectory, _destinationDirectory, extension);
+        var includeSubdirectories = IncludeSubfoldersCheckBox?.IsChecked == true ||
+                                    intent.FilterCriteria?.IncludeSubdirectories == true;
+        var conflictPolicy = AutoRenameConflictsCheckBox?.IsChecked == true
+            ? FileConflictPolicy.AutoRenameNumbered
+            : FileConflictPolicy.SkipExisting;
+
+        request = new FileCopyRequest(
+            _sourceDirectory,
+            _destinationDirectory,
+            extension,
+            IncludeSubdirectories: includeSubdirectories,
+            MaxDepth: FileCopySkill.DefaultSubdirectoryDepth,
+            ConflictPolicy: conflictPolicy);
         return true;
     }
 
@@ -821,6 +992,7 @@ public partial class MainWindow : Window
         ParseButton.IsEnabled = !busy;
         PreviewButton.IsEnabled = !busy;
         ClearHistoryButton.IsEnabled = !busy;
+        AiToolsButton.IsEnabled = !busy;
         CancelButton.IsEnabled = busy && _cancellationTokenSource is not null;
         AppPicker.IsEnabled = !busy && AppPicker.Items.Count > 0;
         LaunchAppButton.IsEnabled = !busy && AppPicker.SelectedItem is AppDefinition;
@@ -849,6 +1021,24 @@ public partial class MainWindow : Window
 
         var megabytes = kilobytes / 1024d;
         return $"{megabytes.ToString("0.#", CultureInfo.CurrentCulture)} مگابایت";
+    }
+
+    private void UserBillingPortalButton_Click(object sender, RoutedEventArgs e)
+    {
+        var window = new UserBillingPortalWindow
+        {
+            Owner = this
+        };
+        window.ShowDialog();
+    }
+
+    private void SiteAdminButton_Click(object sender, RoutedEventArgs e)
+    {
+        var window = new SiteAdminWindow
+        {
+            Owner = this
+        };
+        window.ShowDialog();
     }
 
     private static string ToFriendlyMessage(Exception exception) => exception switch

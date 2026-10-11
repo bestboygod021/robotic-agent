@@ -2,12 +2,18 @@ using System.Text.Json;
 
 namespace Agent.Core.Storage;
 
+public sealed record AuditChainVerificationResult(
+    bool IsValid,
+    int VerifiedCount,
+    int? TamperedEntryIndex);
+
 /// <summary>
-/// Dependency-free local history. It intentionally records counts and outcomes,
-/// not source paths or file contents.
+/// Dependency-free local history with Tamper-Evident SHA-256 Hash Chain (#72).
+/// Intentionally records counts and outcomes, not source paths or file contents.
 /// </summary>
 public sealed class LocalHistoryStore
 {
+    public const string GenesisHash = "0000000000000000000000000000000000000000000000000000000000000000";
     private const int MaximumEntries = 100;
     private const long MaximumHistoryFileBytes = 256 * 1024;
     private static readonly JsonSerializerOptions JsonOptions = new() { WriteIndented = true };
@@ -42,7 +48,17 @@ public sealed class LocalHistoryStore
         try
         {
             var entries = (await ReadUnlockedAsync(cancellationToken).ConfigureAwait(false)).ToList();
-            entries.Insert(0, entry);
+            var prevHash = entries.Count > 0 && !string.IsNullOrWhiteSpace(entries[0].EntryHash)
+                ? entries[0].EntryHash!
+                : GenesisHash;
+            var computedHash = HistoryEntry.ComputeHashHex(entry, prevHash);
+            var chainedEntry = entry with
+            {
+                PreviousEntryHash = prevHash,
+                EntryHash = computedHash
+            };
+
+            entries.Insert(0, chainedEntry);
             if (entries.Count > MaximumEntries)
             {
                 entries.RemoveRange(MaximumEntries, entries.Count - MaximumEntries);
@@ -54,6 +70,42 @@ public sealed class LocalHistoryStore
         {
             _gate.Release();
         }
+    }
+
+    public async Task<AuditChainVerificationResult> VerifyHashChainAsync(CancellationToken cancellationToken = default)
+    {
+        var entries = await LoadAsync(cancellationToken).ConfigureAwait(false);
+        if (entries.Count == 0)
+        {
+            return new AuditChainVerificationResult(true, 0, null);
+        }
+
+        // Entries are stored newest-first (index 0 is newest, index Count-1 is oldest).
+        for (var i = entries.Count - 1; i >= 0; i--)
+        {
+            var current = entries[i];
+            if (string.IsNullOrWhiteSpace(current.EntryHash) || string.IsNullOrWhiteSpace(current.PreviousEntryHash))
+            {
+                return new AuditChainVerificationResult(false, entries.Count - 1 - i, i);
+            }
+
+            if (i < entries.Count - 1)
+            {
+                var older = entries[i + 1];
+                if (!string.Equals(current.PreviousEntryHash, older.EntryHash, StringComparison.OrdinalIgnoreCase))
+                {
+                    return new AuditChainVerificationResult(false, entries.Count - 1 - i, i);
+                }
+            }
+
+            var expectedHash = HistoryEntry.ComputeHashHex(current, current.PreviousEntryHash);
+            if (!string.Equals(current.EntryHash, expectedHash, StringComparison.OrdinalIgnoreCase))
+            {
+                return new AuditChainVerificationResult(false, entries.Count - 1 - i, i);
+            }
+        }
+
+        return new AuditChainVerificationResult(true, entries.Count, null);
     }
 
     public async Task ClearAsync(CancellationToken cancellationToken = default)

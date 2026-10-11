@@ -1,0 +1,11 @@
+{
+  "name": "Robotic Agent v2.0 — Portal & Admin CMS",
+  "short_name": "RoboticAgent",
+  "description": "دستیار هوشمند آفلاین دسکتاپ، ۲۴ مهارت، ۲۰ قالب شغلی، ۴۶ مدل اشتراک و پنل مدیریت سایت",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#0b1120",
+  "theme_color": "#2563eb",
+  "lang": "fa",
+  "dir": "rtl"
+}

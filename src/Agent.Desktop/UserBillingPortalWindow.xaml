@@ -1,0 +1,208 @@
+<Window x:Class="Agent.Desktop.UserBillingPortalWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="💳 پنل کاربری حرفه‌ای، ۴۶ مدل اشتراک و درگاه‌های پرداخت ایرانی و بین‌المللی"
+        Width="1120"
+        Height="820"
+        MinWidth="880"
+        MinHeight="660"
+        WindowStartupLocation="CenterOwner"
+        FlowDirection="RightToLeft"
+        FontFamily="Tahoma, Segoe UI"
+        Background="#F4F6FA">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Row 0: User Profile & Active Subscription Card -->
+        <Border Grid.Row="0" Background="#FFFFFF" BorderBrush="#D8DEE9" BorderThickness="1" CornerRadius="10" Padding="16" Margin="0,0,0,12">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1.2*" />
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0">
+                    <TextBlock Text="👤 پنل کاربری حرفه‌ای و مدیریت اشتراک‌ها (User &amp; Billing Portal)"
+                               FontSize="18"
+                               FontWeight="Bold"
+                               Foreground="#182230" />
+                    <TextBlock x:Name="ActivePlanBannerText"
+                               Text="اشتراک فعال فعلی: نسخهٔ رایگان (Free Starter) | سقف هر نوبت: ۵۰ فایل"
+                               Margin="0,6,0,0"
+                               FontWeight="SemiBold"
+                               Foreground="#1570EF" />
+                </StackPanel>
+
+                <Grid Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="8" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Text="نام و نام خانوادگی / شرکت:" FontSize="12" Foreground="#475467" />
+                        <TextBox x:Name="CustomerNameBox" Text="کاربر حرفه‌ای رباتیک ایجنت" Padding="7,5" Margin="0,3,0,0" />
+                    </StackPanel>
+                    <StackPanel Grid.Column="2">
+                        <TextBlock Text="ایمیل دریافت فاکتور و کلید لایسنس:" FontSize="12" Foreground="#475467" />
+                        <TextBox x:Name="CustomerEmailBox" Text="user@example.com" Padding="7,5" Margin="0,3,0,0" />
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </Border>
+
+        <!-- Row 1: Category Filter & Search Across 46 Subscription Models -->
+        <Border Grid.Row="1" Background="#FFFFFF" BorderBrush="#D8DEE9" BorderThickness="1" CornerRadius="10" Padding="12" Margin="0,0,0,12">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <WrapPanel Grid.Column="0" VerticalAlignment="Center">
+                    <Button Content="همهٔ ۴۶ اشتراک" Padding="10,6" Margin="0,0,6,0" Click="FilterAll_Click" />
+                    <Button Content="عمومی و فردی (۶)" Padding="10,6" Margin="0,0,6,0" Click="FilterPersonal_Click" />
+                    <Button Content="تخصصی مهارت‌ها (۱۰)" Padding="10,6" Margin="0,0,6,0" Click="FilterSkills_Click" />
+                    <Button Content="۲۰ قالب شغلی (۲۰)" Padding="10,6" Margin="0,0,6,0" Click="FilterPlaybooks_Click" />
+                    <Button Content="توکن ابری و صوت (۵)" Padding="10,6" Margin="0,0,6,0" Click="FilterCredits_Click" />
+                    <Button Content="تیمی و سازمانی (۵)" Padding="10,6" Margin="0,0,10,0" Click="FilterEnterprise_Click" />
+                </WrapPanel>
+
+                <TextBox x:Name="SearchPlansBox"
+                         Grid.Column="1"
+                         Padding="8,6"
+                         TextChanged="SearchPlansBox_TextChanged" />
+            </Grid>
+        </Border>
+
+        <!-- Row 2: Main Split — 46 Plans List + 6 Payment Gateways (3 Iranian + 3 Foreign) -->
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1.2*" />
+                <ColumnDefinition Width="14" />
+                <ColumnDefinition Width="1.1*" />
+            </Grid.ColumnDefinitions>
+
+            <!-- 46 Subscription Models List -->
+            <Border Grid.Column="0" Background="#FFFFFF" BorderBrush="#D8DEE9" BorderThickness="1" CornerRadius="10" Padding="14">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0"
+                               Text="📦 فهرست ۴۶ مدل اشتراک و بستهٔ تخصصی (تومان و دلار):"
+                               FontWeight="Bold"
+                               Foreground="#182230"
+                               Margin="0,0,0,8" />
+                    <ListBox x:Name="PlansListBox"
+                             Grid.Row="1"
+                             BorderBrush="#E4E7EC"
+                             SelectionChanged="PlansListBox_SelectionChanged" />
+                </Grid>
+            </Border>
+
+            <!-- Gateway Selection (3 Iranian + 3 International) & Checkout Box -->
+            <Border Grid.Column="2" Background="#FFFFFF" BorderBrush="#D8DEE9" BorderThickness="1" CornerRadius="10" Padding="16">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel>
+                        <TextBlock x:Name="SelectedPlanTitleText"
+                                   Text="۶. لایسنس مادام‌العمر حرفه‌ای (Pro Lifetime Deal)"
+                                   FontSize="16"
+                                   FontWeight="Bold"
+                                   Foreground="#182230"
+                                   TextWrapping="Wrap" />
+                        <TextBlock x:Name="SelectedPlanDescText"
+                                   Margin="0,6,0,10"
+                                   Foreground="#475467"
+                                   TextWrapping="Wrap" />
+                        <Border Background="#EFF8FF" BorderBrush="#B2DDFF" BorderThickness="1" CornerRadius="8" Padding="12" Margin="0,0,0,14">
+                            <TextBlock x:Name="SelectedPlanPriceText"
+                                       FontWeight="Bold"
+                                       FontSize="15"
+                                       Foreground="#175CD3" />
+                        </Border>
+
+                        <TextBlock Text="🏦 انتخاب درگاه پرداخت (۳ درگاه ایرانی شتاب + ۳ درگاه بین‌المللی ارزی/رمزارزی):"
+                                   FontWeight="Bold"
+                                   Foreground="#182230"
+                                   Margin="0,0,0,6" />
+                        <ComboBox x:Name="GatewayComboBox"
+                                  Padding="10,8"
+                                  Margin="0,0,0,12"
+                                  SelectionChanged="GatewayComboBox_SelectionChanged" />
+
+                        <WrapPanel Margin="0,0,0,12">
+                            <Button x:Name="ConnectGatewayButton"
+                                    Content="۱. اتصال به درگاه و ایجاد نشست پرداخت"
+                                    Padding="14,9"
+                                    Margin="0,0,8,4"
+                                    Background="#1570EF"
+                                    Foreground="White"
+                                    BorderThickness="0"
+                                    FontWeight="SemiBold"
+                                    Click="ConnectGatewayButton_Click" />
+                            <Button x:Name="VerifyAndIssueKeyButton"
+                                    Content="۲. تایید پرداخت و صدور آنی کلید لایسنس"
+                                    Padding="14,9"
+                                    Margin="0,0,8,4"
+                                    Background="#067647"
+                                    Foreground="White"
+                                    BorderThickness="0"
+                                    FontWeight="SemiBold"
+                                    Click="VerifyAndIssueKeyButton_Click" />
+                            <Button Content="🧾 فاکتور رسمی QR (#13)"
+                                    Padding="10,8"
+                                    Margin="0,0,6,4"
+                                    Click="ShowQrInvoiceButton_Click" />
+                            <Button Content="📅 ۴ قسط BNPL (#14)"
+                                    Padding="10,8"
+                                    Margin="0,0,6,4"
+                                    Click="ShowBnplScheduleButton_Click" />
+                            <Button Content="📈 ارتقای پلکانی و اسلایدر تیمی (#15, #18, #19)"
+                                    Padding="10,8"
+                                    Margin="0,0,6,4"
+                                    Click="ShowProratedAndTeamQuoteButton_Click" />
+                            <Button Content="👤 امکانات فاز ۳ پنل کاربری (#21 تا #30)"
+                                    Padding="10,8"
+                                    Margin="0,0,0,4"
+                                    Background="#7C3AED"
+                                    Foreground="White"
+                                    BorderThickness="0"
+                                    FontWeight="SemiBold"
+                                    Click="ShowPortalProFeaturesButton_Click" />
+                        </WrapPanel>
+
+                        <TextBlock Text="جزئیات فنی اتصال به درگاه (Checkout URL، کد رهگیری و کلید لایسنس صادرشده):"
+                                   FontSize="12"
+                                   FontWeight="SemiBold"
+                                   Foreground="#344054"
+                                   Margin="0,0,0,4" />
+                        <TextBox x:Name="GatewaySessionOutputBox"
+                                 Height="185"
+                                 IsReadOnly="True"
+                                 TextWrapping="Wrap"
+                                 VerticalScrollBarVisibility="Auto"
+                                 Background="#F8FAFC"
+                                 BorderBrush="#CBD5E1"
+                                 Padding="8" />
+                    </StackPanel>
+                </ScrollViewer>
+            </Border>
+        </Grid>
+
+        <!-- Row 3: Status Footer -->
+        <Border Grid.Row="3" Background="#FFFFFF" BorderBrush="#D8DEE9" BorderThickness="1" CornerRadius="8" Padding="12,8" Margin="0,12,0,0">
+            <TextBlock x:Name="PortalStatusText"
+                       Text="آمادهٔ اتصال به درگاه‌های زرین‌پال، زیبال، آیدی‌پی، Stripe، LemonSqueezy و NOWPayments."
+                       Foreground="#067647"
+                       FontWeight="SemiBold"
+                       TextWrapping="Wrap" />
+        </Border>
+    </Grid>
+</Window>

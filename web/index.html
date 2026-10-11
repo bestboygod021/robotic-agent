@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" id="rootHtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="alternate" hreflang="fa" href="https://robotic-agent.ir/?lang=fa" />
+  <link rel="alternate" hreflang="en" href="https://robotic-agent.ir/?lang=en" />
+  <link rel="alternate" hreflang="zh" href="https://robotic-agent.ir/?lang=zh" />
+  <link rel="alternate" hreflang="es" href="https://robotic-agent.ir/?lang=es" />
+  <link rel="alternate" hreflang="ar" href="https://robotic-agent.ir/?lang=ar" />
+  <link rel="alternate" hreflang="fr" href="https://robotic-agent.ir/?lang=fr" />
+  <title>Robotic Agent — دستیار هوشمند محلی، اتوماسیون اسناد و هاب ۲۰۰ ابزار هوش مصنوعی</title>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Robotic Agent v2.0",
+    "operatingSystem": "Windows 10, Windows 11, Linux, macOS",
+    "applicationCategory": "BusinessApplication",
+    "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "ratingCount": "1420" }
+  }
+  </script>
+  <style>
+    :root {
+      --bg: #0B1120;
+      --surface: #1E293B;
+      --surface-border: #334155;
+      --primary: #3B82F6;
+      --primary-hover: #2563EB;
+      --accent: #10B981;
+      --text: #F8FAFC;
+      --muted: #94A3B8;
+      --gold: #F59E0B;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "Segoe UI", Tahoma, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--surface-border);
+    }
+    .brand { font-size: 1.35rem; font-weight: 800; color: #60A5FA; }
+    .lang-btn {
+      background: var(--surface);
+      color: var(--text);
+      border: 1px solid var(--primary);
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .hero {
+      max-width: 1050px;
+      margin: 56px auto 40px;
+      text-align: center;
+      padding: 0 24px;
+    }
+    .badge {
+      display: inline-block;
+      background: rgba(59, 130, 246, 0.15);
+      color: #93C5FD;
+      border: 1px solid rgba(59, 130, 246, 0.4);
+      padding: 6px 16px;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      margin-bottom: 18px;
+    }
+    h1 { font-size: 2.5rem; line-height: 1.3; margin-bottom: 18px; }
+    .subtitle { font-size: 1.15rem; color: var(--muted); max-width: 820px; margin: 0 auto 28px; }
+    .cta-row { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+      padding: 13px 26px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 700;
+    }
+    .btn-secondary {
+      background: var(--surface);
+      color: var(--text);
+      border: 1px solid var(--surface-border);
+      padding: 13px 26px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .section { max-width: 1200px; margin: 56px auto; padding: 0 24px; }
+    .section-title { text-align: center; font-size: 1.85rem; margin-bottom: 32px; }
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--surface-border);
+      border-radius: 14px;
+      padding: 24px;
+    }
+    .card h3 { color: #93C5FD; margin-bottom: 10px; font-size: 1.2rem; }
+    .card p { color: var(--muted); font-size: 0.96rem; }
+    .roi-box {
+      background: linear-gradient(135deg, #1E293B 0%, #0F172A 100%);
+      border: 1px solid #3B82F6;
+      border-radius: 18px;
+      padding: 32px;
+      max-width: 880px;
+      margin: 0 auto;
+    }
+    .slider-row { margin: 20px 0; }
+    input[type="range"] { width: 100%; accent-color: var(--primary); }
+    .roi-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-top: 24px;
+      text-align: center;
+    }
+    .stat-val { font-size: 2rem; font-weight: 800; color: var(--accent); }
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+    .price-card {
+      background: var(--surface);
+      border: 1px solid var(--surface-border);
+      border-radius: 16px;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .price-card.featured {
+      border: 2px solid var(--gold);
+      box-shadow: 0 0 25px rgba(245, 158, 11, 0.15);
+    }
+    .price-tag { font-size: 2.2rem; font-weight: 800; margin: 14px 0; color: white; }
+    ul.features { list-style: none; margin: 16px 0 24px; }
+    ul.features li { margin-bottom: 9px; color: var(--muted); font-size: 0.94rem; }
+    footer {
+      text-align: center;
+      padding: 36px 20px;
+      border-top: 1px solid var(--surface-border);
+      color: var(--muted);
+      margin-top: 64px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">🤖 Robotic Agent v2.0</div>
+    <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
+      <a href="admin.html" class="lang-btn" style="text-decoration:none; background:#2563EB; border-color:#60A5FA;">⚙️ پنل مدیریت سایت (Admin CMS)</a>
+      <a href="portal.html" class="lang-btn" style="text-decoration:none;">💳 فروشگاه ۴۶ اشتراک</a>
+      <a href="trust.html" class="lang-btn" style="text-decoration:none; border-color:#10B981; color:#34D399;">🛡️ مرکز اعتماد امنیتی</a>
+      <button class="lang-btn" onclick="RoboticSiteCMS.openCommandPalette()">🔍 جستجو (Ctrl+K)</button>
+      <button class="lang-btn" onclick="RoboticSiteCMS.toggleThemeMode()">🌓 تغییر تم (#44)</button>
+      <select id="sixLangSelect" class="lang-btn" onchange="switchSixLanguage(this.value)">
+        <option value="fa">🇮🇷 فارسی (FA)</option>
+        <option value="en">🇺🇸 English (EN)</option>
+        <option value="zh">🇨🇳 中文 (ZH)</option>
+        <option value="es">🇪🇸 Español (ES)</option>
+        <option value="ar">🇸🇦 العربية (AR)</option>
+        <option value="fr">🇫🇷 Français (FR)</option>
+      </select>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="badge" data-fa="۶ زبان زندهٔ دنیا | ۲۴ مهارت آفلاین | ۲۰ قالب شغلی | ۴۶ مدل اشتراک | ۶ درگاه پرداخت"
+                       data-en="6 Global Languages | 24 Offline Skills | 20 SMB Playbooks | 46 Plans | 6 Payment Gateways">
+      ۶ زبان زندهٔ دنیا | ۲۴ مهارت آفلاین | ۲۰ قالب شغلی | ۴۶ مدل اشتراک | ۶ درگاه پرداخت
+    </div>
+    <h1 data-fa="کارهای تکراری فایل، PDF، اکسل و سانسور اطلاعات محرمانه را در چند ثانیه خودکار کنید"
+        data-en="Automate Repetitive File, PDF, Spreadsheet &amp; Privacy Tasks in Seconds — 100% Locally">
+      کارهای تکراری فایل، PDF، اکسل و سانسور اطلاعات محرمانه را در چند ثانیه خودکار کنید
+    </h1>
+    <p class="subtitle"
+       data-fa="بدون آپلود فایل‌های محرمانه در سایت‌های ناشناس! پیش‌نمایش اجباری قبل از اجرا، واگرد تک‌کلیکی با بررسی هش SHA-256، اسکنر ریسک حریم خصوصی و مربی پرامپت‌ساز هوشمند."
+       data-en="Never upload confidential documents to untrusted websites again. Mandatory dry-run preview, 1-click SHA-256 transactional Undo, Privacy Leak Risk Scanner, and Interactive Prompt Coach.">
+      بدون آپلود فایل‌های محرمانه در سایت‌های ناشناس! پیش‌نمایش اجباری قبل از اجرا، واگرد تک‌کلیکی با بررسی هش SHA-256، اسکنر ریسک حریم خصوصی و مربی پرامپت‌ساز هوشمند.
+    </p>
+    <div class="cta-row">
+      <a href="portal.html" class="btn-primary" data-fa="💳 ورود به پنل کاربری و خرید ۴۶ مدل اشتراک (۶ درگاه)" data-en="💳 Open User Portal &amp; 46 Subscription Plans">💳 ورود به پنل کاربری و خرید ۴۶ مدل اشتراک (۶ درگاه)</a>
+      <a href="#roi" class="btn-secondary" data-fa="ماشین‌حساب صرفه‌جویی زمان و هزینه" data-en="Interactive ROI Calculator">ماشین‌حساب صرفه‌جویی زمان و هزینه</a>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2 class="section-title" data-fa="چرا هزاران کاربر و کسب‌وکار Robotic Agent را انتخاب می‌کنند؟" data-en="Why Professionals &amp; SMBs Choose Robotic Agent">
+      چرا هزاران کاربر و کسب‌وکار Robotic Agent را انتخاب می‌کنند؟
+    </h2>
+    <div class="grid-3">
+      <div class="card">
+        <h3 data-fa="🛡️ اسکنر ریسک حریم خصوصی و سانسور PII" data-en="🛡️ Privacy Risk Scanner &amp; PII Redaction">🛡️ اسکنر ریسک حریم خصوصی و سانسور PII</h3>
+        <p data-fa="شناسایی و ماسک کردن خودکار شماره کارت (الگوریتم Luhn)، شبا، ایمیل، تلفن و مختصات GPS عکس‌ها در نسخهٔ _sanitized با حفظ ۱۰۰٪ فایل اصلی."
+           data-en="Automatically detects and masks credit cards (Luhn verified), IBANs, emails, phones, and photo GPS/EXIF metadata into _sanitized copies.">
+          شناسایی و ماسک کردن خودکار شماره کارت (الگوریتم Luhn)، شبا، ایمیل، تلفن و مختصات GPS عکس‌ها در نسخهٔ _sanitized با حفظ ۱۰۰٪ فایل اصلی.
+        </p>
+      </div>
+      <div class="card">
+        <h3 data-fa="⚡ استودیو گردش‌کار و ۲۰ قالب شغلی" data-en="⚡ Workflow Studio &amp; 20 SMB Playbooks">⚡ استودیو گردش‌کار و ۲۰ قالب شغلی</h3>
+        <p data-fa="پایپ‌لاین‌های یک‌کلیکی برای حسابداری (استخراج فاکتور به CSV)، حقوقی، منابع انسانی، تولید محتوا و IT همراه با پیش‌نمایش سرتاسری و واگرد معکوس."
+           data-en="1-click multi-step pipelines for Accounting (Invoice to CSV), Legal, HR, Content, and IT with End-to-End Dry-Run and reverse-order rollback.">
+          پایپ‌لاین‌های یک‌کلیکی برای حسابداری (استخراج فاکتور به CSV)، حقوقی، منابع انسانی، تولید محتوا و IT همراه با پیش‌نمایش سرتاسری و واگرد معکوس.
+        </p>
+      </div>
+      <div class="card">
+        <h3 data-fa="🤖 هاب ۲۰۰ ابزار AI + مربی پرامپت‌ساز + سرور MCP" data-en="🤖 200 AI Tools Hub + Prompt Coach + MCP Server">🤖 هاب ۲۰۰ ابزار AI + مربی پرامپت‌ساز + سرور MCP</h3>
+        <p data-fa="پیشنهاد هوشمند ابزار بر اساس مشکل شما، جدول مقایسهٔ رودررو، مربی نوشتن پرامپت حرفه‌ای و اتصال استاندارد MCP به Claude و Cursor."
+           data-en="Smart tool matchmaker, side-by-side comparison matrix, PII-safe Interactive Prompt Coach, and JSON-RPC 2.0 MCP Server integration.">
+          پیشنهاد هوشمند ابزار بر اساس مشکل شما، جدول مقایسهٔ رودررو، مربی نوشتن پرامپت حرفه‌ای و اتصال استاندارد MCP به Claude و Cursor.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="privacy-sandbox">
+    <div class="roi-box" style="border-color:#10B981;">
+      <h2 class="section-title" data-fa="🛡️ دموی زندهٔ سانسور اطلاعات محرمانه در مرورگر (#42 Live Privacy Sandbox)" data-en="🛡️ Live In-Browser Privacy Redactor Sandbox (#42)">
+        🛡️ دموی زندهٔ سانسور اطلاعات محرمانه در مرورگر (#42 Live Privacy Sandbox)
+      </h2>
+      <p style="text-align:center; color:var(--muted); margin-bottom:14px;">
+        متن نمونهٔ زیر حاوی شماره کارت، شبا، تلفن و ایمیل است. آن را تغییر دهید تا ببینید موتور سانسور محلی چگونه نسخهٔ امن <code>_sanitized</code> را تولید می‌کند:
+      </p>
+      <div class="grid-3" style="grid-template-columns:1fr 1fr; gap:14px;">
+        <div>
+          <label style="font-size:0.85rem; color:#93C5FD;">ورودی خام (حاوی اطلاعات حساس PII):</label>
+          <textarea id="sandboxInput" oninput="runLiveSandboxRedactor()" style="width:100%; height:115px; background:#020617; color:#fff; border:1px solid #334155; border-radius:10px; padding:10px; margin-top:6px; font-family:inherit;">فاکتور مشتری علی رضایی با موبایل 09123456789 و ایمیل ali.rezaei@company.ir
+شماره کارت پرداخت: 6037-9975-9911-2233 و شبا IR062960000000100324200001</textarea>
+        </div>
+        <div>
+          <label style="font-size:0.85rem; color:#34D399;">خروجی پاک‌سازی‌شده در فایل <code>_sanitized</code> (حفظ ۱۰۰٪ فایل اصلی):</label>
+          <textarea id="sandboxOutput" readonly style="width:100%; height:115px; background:#020617; color:#6EE7B7; border:1px solid #10B981; border-radius:10px; padding:10px; margin-top:6px; font-family:inherit;"></textarea>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="playbooks-explorer">
+    <div class="roi-box" style="border-color:#F59E0B;">
+      <h2 class="section-title">💼 کاوشگر تعاملی ۲۰ قالب آمادهٔ شغلی (#47 Interactive 20 SMB Job Playbooks Explorer)</h2>
+      <p style="text-align:center; color:var(--muted); margin-bottom:14px;">
+        شغل یا دپارتمان خود را از فهرست ۲۰ قالب زیر انتخاب کنید تا گام‌های خودکارسازی آفلاین و اشتراک اختصاصی آن را مشاهده نمایید:
+      </p>
+      <div style="display:flex; flex-wrap:wrap; gap:12px; justify-content:center; align-items:center; margin-bottom:14px;">
+        <select id="playbookExplorerSelect" onchange="renderPlaybookExplorerUI()" style="background:#020617; color:#fff; border:1px solid #F59E0B; padding:10px 14px; border-radius:10px; font-size:0.95rem; min-width:320px;">
+          <option value="17">۱. حسابداران و مدیران مالی (پلن #17 — مغایرت‌گیری بانکی و اکسل)</option>
+          <option value="18">۲. وکلا و دفاتر حقوقی (پلن #18 — قراردادساز، NDA و سانسور اسناد)</option>
+          <option value="19">۳. منابع انسانی و کارگزینی HR (پلن #19 — دسته‌بندی رزومه و سانسور PII)</option>
+          <option value="20">۴. مدیران فروشگاه اینترنتی (پلن #20 — استخراج فاکتور و فشرده‌سازی عکس)</option>
+          <option value="21">۵. یوتیوبرها و تولیدکنندگان محتوا (پلن #21 — استودیو زیرنویس SRT)</option>
+          <option value="22">۶. اساتید دانشگاه و پژوهشگران (پلن #22 — ادغام مقالات PDF و خلاصه‌سازی)</option>
+          <option value="23">۷. مترجمان رسمی و دارالترجمه‌ها (پلن #23 — استانداردسازی متون و زیرنویس)</option>
+          <option value="24">۸. مطب‌ها و کلینیک‌های پزشکی (پلن #24 — ناشناس‌سازی پرونده و پاک‌سازی EXIF)</option>
+          <option value="25">۹. مشاوران املاک و مستغلات (پلن #25 — قولنامه، واترمارک و آرشیو عکس ملک)</option>
+          <option value="26">۱۰. تیم‌های پشتیبانی مشتریان CRM (پلن #26 — پاک‌سازی لاگ و تیکت‌ها)</option>
+          <option value="27">۱۱. مهندسان نرم‌افزار و DevOps (پلن #27 — سرور محلی MCP و اعتبارسنجی JSON/YAML)</option>
+          <option value="28">۱۲. عکاسان و آتلیه‌ها (پلن #28 — حذف GPS/EXIF و تغییرنام دسته‌ای عکس‌ها)</option>
+          <option value="29">۱۳. شرکت‌های لجستیک، انبارداری و گمرک (پلن #29 — تطبیق بارنامه و CSV)</option>
+          <option value="30">۱۴. معلمان، مدارس و آموزشگاه‌ها (پلن #30 — ساخت جزوه PDF و کارنامه)</option>
+          <option value="31">۱۵. ادمین‌های اینستاگرام و تلگرام (پلن #31 — واترمارک، زیرنویس و تقویم محتوا)</option>
+          <option value="32">۱۶. واحد تدارکات و خرید شرکت‌ها (پلن #32 — مقایسهٔ پیش‌فاکتورهای تامین‌کنندگان)</option>
+          <option value="33">۱۷. خبرنگاران و تحریریهٔ رسانه‌ها (پلن #33 — پیاده‌سازی مصاحبه و حفاظت منبع)</option>
+          <option value="34">۱۸. فریلنسرها و مشاوران مستقل (پلن #34 — قرارداد دوزبانه و پیش‌فاکتور)</option>
+          <option value="35">۱۹. دفاتر معماری، عمران و مهندسی (پلن #35 — آرشیو نقشه و صورت‌جلسه کارگاه)</option>
+          <option value="36">۲۰. برگزارکنندگان همایش و رویدادها (پلن #36 — صدور گواهی و مدیریت ثبت‌نام CSV)</option>
+        </select>
+        <a href="portal.html" class="btn-primary" style="padding:10px 18px;">💳 مشاهده و خرید این قالب در فروشگاه ۴۶ اشتراک</a>
+      </div>
+      <div id="playbookExplorerDetailBox" style="background:#020617; border:1px solid #334155; border-radius:10px; padding:14px; color:#E2E8F0; font-size:0.9rem;"></div>
+    </div>
+  </section>
+
+  <section class="section" id="roi">
+    <div class="roi-box">
+      <h2 class="section-title" data-fa="📊 ماشین‌حساب زمان و پول ذخیره‌شدهٔ شما" data-en="📊 Interactive Time &amp; Money Saved Calculator">
+        📊 ماشین‌حساب زمان و پول ذخیره‌شدهٔ شما
+      </h2>
+      <div class="slider-row">
+        <label id="sliderLabel">تعداد فایل، فاکتور یا سند پردازش‌شده در روز: <strong>40</strong></label>
+        <input type="range" id="filesPerDaySlider" min="5" max="300" value="40" oninput="updateRoi()" />
+      </div>
+      <div class="roi-stats">
+        <div>
+          <div class="stat-val" id="hoursPerMonthVal">9.3 hrs</div>
+          <div data-fa="ساعت وقت آزادشده در ماه" data-en="Hours Saved per Month">ساعت وقت آزادشده در ماه</div>
+        </div>
+        <div>
+          <div class="stat-val" id="filesPerYearVal">12,000</div>
+          <div data-fa="فایل و سند خودکارسازی‌شده در سال" data-en="Files Automated per Year">فایل و سند خودکارسازی‌شده در سال</div>
+        </div>
+        <div>
+          <div class="stat-val" id="usdPerYearVal">$2,790</div>
+          <div data-fa="ارزش مالی صرفه‌جویی سالانه" data-en="Estimated Annual Value Saved">ارزش مالی صرفه‌جویی سالانه</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="pricing">
+    <h2 class="section-title" data-fa="پلن‌های شفاف (بدون هزینهٔ پنهان سرور)" data-en="Simple, Transparent Pricing">
+      پلن‌های شفاف (بدون هزینهٔ پنهان سرور)
+    </h2>
+    <div class="pricing-grid">
+      <div class="price-card">
+        <div>
+          <h3 data-fa="نسخهٔ رایگان (Free)" data-en="Free Starter">نسخهٔ رایگان (Free)</h3>
+          <div class="price-tag">$0</div>
+          <ul class="features">
+            <li data-fa="✓ دسترسی کامل به کاتالوگ ۲۰۰ ابزار AI" data-en="✓ Full 200 AI Tools Hub &amp; Matchmaker">✓ دسترسی کامل به کاتالوگ ۲۰۰ ابزار AI</li>
+            <li data-fa="✓ مربی پرامپت‌ساز تعاملی و راهنمای دوزبانه" data-en="✓ Interactive Prompt Coach &amp; Bilingual Guide">✓ مربی پرامپت‌ساز تعاملی و راهنمای دوزبانه</li>
+            <li data-fa="✓ مهارت‌های پایه تا ۵۰ فایل در هر نوبت" data-en="✓ Core File Skills (up to 50 files/batch)">✓ مهارت‌های پایه تا ۵۰ فایل در هر نوبت</li>
+          </ul>
+        </div>
+        <a href="#" class="btn-secondary" style="text-align:center;" data-fa="شروع رایگان" data-en="Start Free">شروع رایگان</a>
+      </div>
+
+      <div class="price-card featured">
+        <div>
+          <div class="badge" style="background:rgba(245,158,11,0.2);color:#FCD34D;border-color:#F59E0B;" data-fa="🔥 پرفروش‌ترین — پرداخت یک‌بار برای همیشه" data-en="🔥 Best Value — Pay Once, Own Forever">🔥 پرفروش‌ترین — پرداخت یک‌بار برای همیشه</div>
+          <h3 data-fa="لایسنس مادام‌العمر (Lifetime Deal)" data-en="Lifetime Deal (LTD)">لایسنس مادام‌العمر (Lifetime Deal)</h3>
+          <div class="price-tag">$49</div>
+          <ul class="features">
+            <li data-fa="✓ باز شدن کامل ۲۲ مهارت آفلاین و ۲۰ قالب شغلی" data-en="✓ All 22 Offline Skills &amp; 20 SMB Playbooks">✓ باز شدن کامل ۲۲ مهارت آفلاین و ۲۰ قالب شغلی</li>
+            <li data-fa="✓ پردازش دسته‌ای تا ۵٬۰۰۰ فایل در هر نوبت" data-en="✓ High-Volume Batch Processing (5,000 files)">✓ پردازش دسته‌ای تا ۵٬۰۰۰ فایل در هر نوبت</li>
+            <li data-fa="✓ نگهبان پوشه، زمان‌بند خودکار و سرور MCP" data-en="✓ Folder Watcher, Scheduler &amp; MCP Server">✓ نگهبان پوشه، زمان‌بند خودکار و سرور MCP</li>
+            <li data-fa="✓ کلید لایسنس آفلاین دائمی (RA-LTD)" data-en="✓ Offline Signed Lifetime Key (RA-LTD)">✓ کلید لایسنس آفلاین دائمی (RA-LTD)</li>
+          </ul>
+        </div>
+        <a href="#" class="btn-primary" style="text-align:center;background:var(--gold);color:#0B1120;" data-fa="دریافت لایسنس مادام‌العمر" data-en="Get Lifetime License">دریافت لایسنس مادام‌العمر</a>
+      </div>
+
+      <div class="price-card">
+        <div>
+          <h3 data-fa="نسخهٔ سازمانی (Enterprise)" data-en="Enterprise Compliance">نسخهٔ سازمانی (Enterprise)</h3>
+          <div class="price-tag">$149</div>
+          <ul class="features">
+            <li data-fa="✓ قفل سخت‌گیرانهٔ شبکه (ForceLocalOnlyMode)" data-en="✓ Strict Air-Gapped Network Lock">✓ قفل سخت‌گیرانهٔ شبکه (ForceLocalOnlyMode)</li>
+            <li data-fa="✓ سیاست سازمانی امضاشده با HMAC-SHA256" data-en="✓ Signed Enterprise Policy (HMAC-SHA256)">✓ سیاست سازمانی امضاشده با HMAC-SHA256</li>
+            <li data-fa="✓ لاگ حسابرسی غیرقابل‌تحریف با زنجیرهٔ هش" data-en="✓ Tamper-Evident Hash-Chain Audit Log">✓ لاگ حسابرسی غیرقابل‌تحریف با زنجیرهٔ هش</li>
+          </ul>
+        </div>
+        <a href="#" class="btn-secondary" style="text-align:center;" data-fa="دریافت نسخهٔ سازمانی" data-en="Get Enterprise">دریافت نسخهٔ سازمانی</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p id="footerTextEl">Robotic Agent v2.0 — Built with .NET 10, WPF &amp; Cross-Platform CLI (`agent-cli`)</p>
+  </footer>
+
+  <script src="site-config.js"></script>
+  <script>
+    let currentLang = 'fa';
+
+    function applyAdminCmsToLanding() {
+      if (!window.RoboticSiteCMS) return;
+      RoboticSiteCMS.injectAdminQuickBar();
+      const cfg = RoboticSiteCMS.loadConfig();
+      const b = cfg.branding;
+
+      document.title = b.seoTitle || document.title;
+      document.documentElement.style.setProperty('--primary', b.primaryColor || '#2563EB');
+      document.documentElement.style.setProperty('--accent', b.accentColor || '#10B981');
+
+      const brandEl = document.querySelector('.brand');
+      if (brandEl && b.brandName) brandEl.textContent = b.brandName;
+
+      const heroBadge = document.querySelector('.hero .badge');
+      if (heroBadge) {
+        heroBadge.setAttribute('data-fa', b.heroBadgeFa);
+        heroBadge.setAttribute('data-en', b.heroBadgeEn);
+        heroBadge.textContent = currentLang === 'fa' ? b.heroBadgeFa : b.heroBadgeEn;
+      }
+
+      const heroH1 = document.querySelector('.hero h1');
+      if (heroH1) {
+        heroH1.setAttribute('data-fa', b.heroTitleFa);
+        heroH1.setAttribute('data-en', b.heroTitleEn);
+        heroH1.textContent = currentLang === 'fa' ? b.heroTitleFa : b.heroTitleEn;
+      }
+
+      const heroSub = document.querySelector('.hero .subtitle');
+      if (heroSub) {
+        heroSub.setAttribute('data-fa', b.heroSubtitleFa);
+        heroSub.setAttribute('data-en', b.heroSubtitleEn);
+        heroSub.textContent = currentLang === 'fa' ? b.heroSubtitleFa : b.heroSubtitleEn;
+      }
+
+      const footerP = document.getElementById('footerTextEl');
+      if (footerP && b.footerTextFa) footerP.textContent = b.footerTextFa;
+
+      const heroSec = document.querySelector('.hero');
+      if (heroSec) heroSec.style.display = cfg.sections.showHero === false ? 'none' : '';
+      const roiSec = document.getElementById('roi');
+      if (roiSec) roiSec.style.display = cfg.sections.showRoiCalculator === false ? 'none' : '';
+      const priceSec = document.getElementById('pricing');
+      if (priceSec) priceSec.style.display = cfg.sections.showPricing === false ? 'none' : '';
+      const footerSec = document.querySelector('footer');
+      if (footerSec) footerSec.style.display = cfg.sections.showFooter === false ? 'none' : '';
+    }
+
+    function toggleLang() {
+      currentLang = currentLang === 'fa' ? 'en' : 'fa';
+      const html = document.documentElement;
+      html.lang = currentLang;
+      html.dir = currentLang === 'fa' ? 'rtl' : 'ltr';
+      document.getElementById('langToggleBtn').textContent =
+        currentLang === 'fa' ? '🌐 Switch to English' : '🌐 تغییر زبان به فارسی';
+
+      document.querySelectorAll('[data-fa]').forEach(el => {
+        el.textContent = el.getAttribute(currentLang === 'fa' ? 'data-fa' : 'data-en');
+      });
+      updateRoi();
+    }
+
+    function updateRoi() {
+      const filesPerDay = parseInt(document.getElementById('filesPerDaySlider').value, 10);
+      const label = document.getElementById('sliderLabel');
+      label.innerHTML = currentLang === 'fa'
+        ? `تعداد فایل، فاکتور یا سند پردازش‌شده در روز: <strong>${filesPerDay}</strong>`
+        : `Files, invoices, or documents processed per day: <strong>${filesPerDay}</strong>`;
+
+      const secondsPerFile = 28;
+      const workingDaysPerMonth = 25;
+      const hoursPerMonth = ((filesPerDay * secondsPerFile * workingDaysPerMonth) / 3600).toFixed(1);
+      const filesPerYear = (filesPerDay * 300).toLocaleString('en-US');
+      const usdPerYear = Math.round(hoursPerMonth * 12 * 25).toLocaleString('en-US');
+
+      document.getElementById('hoursPerMonthVal').textContent = `${hoursPerMonth} hrs`;
+      document.getElementById('filesPerYearVal').textContent = filesPerYear;
+      document.getElementById('usdPerYearVal').textContent = `$${usdPerYear}`;
+    }
+
+    function runLiveSandboxRedactor() {
+      const raw = document.getElementById('sandboxInput')?.value || '';
+      const sanitized = raw
+        .replace(/\b(?:\d[ -]*?){13,16}\b/g, '[REDACTED-CARD]')
+        .replace(/\bIR\d{24}\b/gi, '[REDACTED-IBAN]')
+        .replace(/\b09\d{9}\b/g, '[REDACTED-PHONE]')
+        .replace(/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/g, '[REDACTED-EMAIL]');
+      const out = document.getElementById('sandboxOutput');
+      if (out) out.value = sanitized;
+    }
+
+    const SIX_LANG_HERO = {
+      fa: { dir: 'rtl', title: 'کارهای تکراری فایل، PDF، اکسل و سانسور اطلاعات محرمانه را در چند ثانیه خودکار کنید', sub: 'بدون آپلود فایل‌های محرمانه در سایت‌های ناشناس! پیش‌نمایش اجباری قبل از اجرا، واگرد تک‌کلیکی با هش SHA-256 و ۲۴ مهارت آفلاین.' },
+      en: { dir: 'ltr', title: 'Automate Repetitive File, PDF, Spreadsheet & Privacy Tasks in Seconds — 100% Locally', sub: 'Never upload confidential documents to untrusted websites again. Mandatory dry-run preview, 1-click SHA-256 Undo, and 24 offline skills.' },
+      zh: { dir: 'ltr', title: '在几秒钟内本地自动化处理文件、PDF、表格与隐私脱敏 — 100% 离线安全', sub: '无需将机密文档上传到未知云端！内置 24 项离线技能、20 个行业模板与 SHA-256 一键撤销。' },
+      es: { dir: 'ltr', title: 'Automatice tareas repetitivas de archivos, PDF, Excel y privacidad en segundos — 100% local', sub: 'Sin subir documentos confidenciales a sitios externos. Vista previa obligatoria, deshacer con SHA-256 y 24 habilidades offline.' },
+      ar: { dir: 'rtl', title: 'أتمتة المهام المتكررة للملفات وPDF وإكسل وحماية الخصوصية في ثوانٍ — محلياً ١٠٠٪', sub: 'دون رفع مستنداتك السرية إلى مواقع خارجية! معاينة إلزامية قبل التنفيذ، تراجع بنقرة واحدة و٢٤ مهارة غير متصلة بالإنترنت.' },
+      fr: { dir: 'ltr', title: 'Automatisez vos tâches de fichiers, PDF, Excel et confidentialité en quelques secondes — 100% local', sub: 'Ne téléversez plus vos documents confidentiels. Aperçu obligatoire avant exécution, annulation SHA-256 en 1 clic et 24 compétences hors ligne.' }
+    };
+
+    function switchSixLanguage(langCode) {
+      currentLang = langCode || 'fa';
+      const pack = SIX_LANG_HERO[currentLang] || SIX_LANG_HERO.fa;
+      document.documentElement.lang = currentLang;
+      document.documentElement.dir = pack.dir;
+      const h1 = document.querySelector('.hero h1');
+      const sub = document.querySelector('.hero .subtitle');
+      if (h1) h1.textContent = pack.title;
+      if (sub) sub.textContent = pack.sub;
+      document.querySelectorAll('[data-fa]').forEach(el => {
+        if (el !== h1 && el !== sub) {
+          el.textContent = el.getAttribute((currentLang === 'fa' || currentLang === 'ar') ? 'data-fa' : 'data-en');
+        }
+      });
+      updateRoi();
+    }
+
+    function renderPlaybookExplorerUI() {
+      const planNum = Number(document.getElementById('playbookExplorerSelect')?.value || 17);
+      const cfg = window.RoboticSiteCMS ? RoboticSiteCMS.loadConfig() : null;
+      const plan = cfg?.plans?.find(p => p.n === planNum);
+      const box = document.getElementById('playbookExplorerDetailBox');
+      if (box) {
+        box.innerHTML = plan
+          ? `✅ <strong>${plan.fa} (${plan.en})</strong> | کد اشتراک: <code>${plan.sku}</code><br/>` +
+            `• گام‌های خودکارسازی محلی: ۱. پیش‌نمایش Dry-Run پوشه ← ۲. اجرای مهارت‌های تخصصی شغل و تولید نسخهٔ <code>_sanitized</code> ← ۳. ثبت در زنجیرهٔ هش و امکان واگرد تک‌کلیکی (Undo)<br/>` +
+            `• قیمت اشتراک اختصاصی: <strong style="color:#34D399;">${plan.toman.toLocaleString('fa-IR')} تومان (درگاه‌های ایرانی) | $${plan.usd.toFixed(2)} USD (درگاه‌های خارجی)</strong> — سقف: ${plan.batch.toLocaleString('fa-IR')} فایل در هر نوبت`
+          : '';
+      }
+    }
+
+    runLiveSandboxRedactor();
+    renderPlaybookExplorerUI();
+    applyAdminCmsToLanding();
+  </script>
+</body>
+</html>

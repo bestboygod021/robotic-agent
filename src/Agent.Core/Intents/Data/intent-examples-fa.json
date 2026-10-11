@@ -374,5 +374,197 @@
   {
     "intent": "Other",
     "text": "فایل ها را کپی نکن"
+  },
+  {
+    "intent": "CopyFiles",
+    "text": "انسخ ملفات pdf"
+  },
+  {
+    "intent": "CopyFiles",
+    "text": "قم بنسخ هذه الملفات"
+  },
+  {
+    "intent": "CopyFiles",
+    "text": "خذ نسخة احتياطية من الملفات"
+  },
+  {
+    "intent": "CopyFiles",
+    "text": "اصنع نسخة من المستندات"
+  },
+  {
+    "intent": "MoveFiles",
+    "text": "انقل الملفات الى المجلد"
+  },
+  {
+    "intent": "MoveFiles",
+    "text": "نقل هذه المستندات"
+  },
+  {
+    "intent": "DeleteFiles",
+    "text": "احذف الملفات القديمة"
+  },
+  {
+    "intent": "DeleteFiles",
+    "text": "امسح ملفات pdf"
+  },
+  {
+    "intent": "OpenApp",
+    "text": "افتح الحاسبة"
+  },
+  {
+    "intent": "OpenApp",
+    "text": "شغل برنامج المفكرة"
+  },
+  {
+    "intent": "Other",
+    "text": "لا تنسخ الملفات"
+  },
+  {
+    "intent": "Other",
+    "text": "اعرض جميع الملفات"
+  },
+  {
+    "intent": "CopyFiles",
+    "text": "copiar los archivos pdf"
+  },
+  {
+    "intent": "CopyFiles",
+    "text": "haz una copia de estos documentos"
+  },
+  {
+    "intent": "CopyFiles",
+    "text": "duplicar los archivos de la carpeta"
+  },
+  {
+    "intent": "CopyFiles",
+    "text": "respaldar estos archivos"
+  },
+  {
+    "intent": "MoveFiles",
+    "text": "mover los archivos a otra carpeta"
+  },
+  {
+    "intent": "MoveFiles",
+    "text": "trasladar estos documentos"
+  },
+  {
+    "intent": "DeleteFiles",
+    "text": "eliminar los archivos antiguos"
+  },
+  {
+    "intent": "DeleteFiles",
+    "text": "borrar los documentos pdf"
+  },
+  {
+    "intent": "OpenApp",
+    "text": "abrir la calculadora"
+  },
+  {
+    "intent": "OpenApp",
+    "text": "ejecutar el bloc de notas"
+  },
+  {
+    "intent": "Other",
+    "text": "no copiar los archivos"
+  },
+  {
+    "intent": "Other",
+    "text": "mostrar todos los archivos"
+  },
+  {
+    "intent": "CopyFiles",
+    "text": "copier les fichiers pdf"
+  },
+  {
+    "intent": "CopyFiles",
+    "text": "fais une copie de ces documents"
+  },
+  {
+    "intent": "CopyFiles",
+    "text": "dupliquer les fichiers du dossier"
+  },
+  {
+    "intent": "CopyFiles",
+    "text": "sauvegarder ces fichiers"
+  },
+  {
+    "intent": "MoveFiles",
+    "text": "deplacer les fichiers vers le dossier"
+  },
+  {
+    "intent": "MoveFiles",
+    "text": "transferer ces documents"
+  },
+  {
+    "intent": "DeleteFiles",
+    "text": "supprimer les fichiers pdf"
+  },
+  {
+    "intent": "DeleteFiles",
+    "text": "effacer ces anciens documents"
+  },
+  {
+    "intent": "OpenApp",
+    "text": "ouvrir la calculatrice"
+  },
+  {
+    "intent": "OpenApp",
+    "text": "lancer le bloc notes"
+  },
+  {
+    "intent": "Other",
+    "text": "ne pas copier les fichiers"
+  },
+  {
+    "intent": "Other",
+    "text": "afficher tous les fichiers"
+  },
+  {
+    "intent": "CopyFiles",
+    "text": "复制这些pdf文件"
+  },
+  {
+    "intent": "CopyFiles",
+    "text": "请把文件夹里的文档复制一份"
+  },
+  {
+    "intent": "CopyFiles",
+    "text": "备份这些重要文件"
+  },
+  {
+    "intent": "CopyFiles",
+    "text": "拷贝所有图片和文档"
+  },
+  {
+    "intent": "MoveFiles",
+    "text": "移动这些文件到目标文件夹"
+  },
+  {
+    "intent": "MoveFiles",
+    "text": "把文档转移到新目录"
+  },
+  {
+    "intent": "DeleteFiles",
+    "text": "删除这些旧文件"
+  },
+  {
+    "intent": "DeleteFiles",
+    "text": "清空并移除pdf文件"
+  },
+  {
+    "intent": "OpenApp",
+    "text": "打开计算器"
+  },
+  {
+    "intent": "OpenApp",
+    "text": "启动记事本程序"
+  },
+  {
+    "intent": "Other",
+    "text": "不要复制这些文件"
+  },
+  {
+    "intent": "Other",
+    "text": "查看文件夹里有多少文件"
   }
 ]

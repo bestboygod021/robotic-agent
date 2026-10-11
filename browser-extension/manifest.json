@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "Robotic Agent Companion — PII Shield & Smart Prompt Coach",
+  "version": "2.0.0",
+  "description": "Scrub sensitive PII (cards, IBAN, emails, phones) from web prompts, convert tables to Markdown/CSV, and craft expert prompts locally.",
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Robotic Agent Companion (FA/EN)"
+  },
+  "permissions": [
+    "clipboardWrite"
+  ]
+}

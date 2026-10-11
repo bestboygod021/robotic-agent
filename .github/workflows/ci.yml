@@ -1,0 +1,34 @@
+name: RoboticAgent CI & Catalog Integrity
+
+on:
+  push:
+    branches: [ "**" ]
+  pull_request:
+    branches: [ "**" ]
+
+jobs:
+  verify-core-and-cli:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup .NET 10
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Build Agent.Core and Agent.Cli
+        run: |
+          dotnet build src/Agent.Core/Agent.Core.csproj --configuration Release
+          dotnet build src/Agent.Cli/Agent.Cli.csproj --configuration Release
+
+      - name: Run Agent.Core.Tests (All 8 Phases & Security Fuzz Suite)
+        run: |
+          dotnet run --project tests/Agent.Core.Tests/Agent.Core.Tests.csproj --configuration Release
+
+      - name: Run CLI Diagnostics & Catalog Audit
+        run: |
+          dotnet run --project src/Agent.Cli/Agent.Cli.csproj --configuration Release -- skills --lang fa
+          dotnet run --project src/Agent.Cli/Agent.Cli.csproj --configuration Release -- playbooks --lang en
+          dotnet run --project src/Agent.Cli/Agent.Cli.csproj --configuration Release -- diagnose --lang fa

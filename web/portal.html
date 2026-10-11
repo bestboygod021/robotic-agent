@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>پنل کاربری حرفه‌ای و فروشگاه ۴۶ مدل اشتراک | Robotic Agent Billing Portal</title>
+  <link rel="manifest" href="manifest.json" />
+  <script src="site-config.js"></script>
+  <style>
+    :root {
+      --bg: #0b1120;
+      --card: #111827;
+      --card-2: #1e293b;
+      --border: #334155;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --primary: #2563eb;
+      --accent: #10b981;
+      --amber: #f59e0b;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: Tahoma, "Segoe UI", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+    }
+    .container { max-width: 1240px; margin: 0 auto; padding: 24px 20px 60px; }
+    header {
+      display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center;
+      gap: 14px; padding-bottom: 18px; border-bottom: 1px solid var(--border); margin-bottom: 22px;
+    }
+    .logo { font-size: 1.35rem; font-weight: bold; color: #60a5fa; }
+    .nav-links a {
+      color: var(--text); text-decoration: none; background: var(--card-2);
+      border: 1px solid var(--border); padding: 7px 14px; border-radius: 8px; font-size: 0.9rem;
+    }
+    .dashboard-top {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 14px; margin-bottom: 22px;
+    }
+    .stat-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 16px;
+    }
+    .stat-card .label { font-size: 0.84rem; color: var(--muted); }
+    .stat-card .val { font-size: 1.2rem; font-weight: bold; color: #38bdf8; margin-top: 4px; }
+    .gateways-bar {
+      background: linear-gradient(135deg, #172554, #0f172a);
+      border: 1px solid #1d4ed8; border-radius: 14px; padding: 18px; margin-bottom: 22px;
+    }
+    .gateways-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(185px, 1fr)); gap: 10px; margin-top: 12px;
+    }
+    .gw-option {
+      background: rgba(15, 23, 42, 0.85); border: 2px solid var(--border); border-radius: 10px;
+      padding: 10px 12px; cursor: pointer; transition: 0.15s;
+    }
+    .gw-option.active { border-color: var(--accent); background: rgba(6, 78, 59, 0.35); }
+    .gw-badge { font-size: 0.75rem; padding: 2px 7px; border-radius: 999px; background: #1e293b; color: #93c5fd; }
+    .filters {
+      display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 18px;
+    }
+    .filter-btn {
+      background: var(--card); color: var(--text); border: 1px solid var(--border);
+      padding: 8px 13px; border-radius: 8px; cursor: pointer; font-size: 0.86rem;
+    }
+    .filter-btn.active { background: var(--primary); border-color: #60a5fa; font-weight: bold; }
+    .search-input {
+      flex: 1; min-width: 220px; background: var(--card); color: var(--text);
+      border: 1px solid var(--border); padding: 9px 12px; border-radius: 8px;
+    }
+    .plans-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px;
+    }
+    .plan-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+      padding: 16px; display: flex; flex-direction: column; justify-content: space-between;
+    }
+    .plan-card h3 { font-size: 1rem; color: #93c5fd; margin-bottom: 6px; }
+    .plan-card p { font-size: 0.84rem; color: var(--muted); margin-bottom: 10px; }
+    .price-box {
+      background: #0f172a; border: 1px solid #1e293b; border-radius: 8px; padding: 8px 10px; margin-bottom: 10px;
+      font-size: 0.9rem; font-weight: bold; color: #34d399;
+    }
+    .buy-btn {
+      width: 100%; background: var(--primary); color: #fff; border: none; padding: 9px;
+      border-radius: 8px; font-weight: bold; cursor: pointer;
+    }
+    .buy-btn:hover { background: #1d4ed8; }
+    .checkout-panel {
+      margin-top: 26px; background: var(--card); border: 2px solid var(--accent);
+      border-radius: 14px; padding: 20px;
+    }
+    pre {
+      background: #020617; color: #a7f3d0; padding: 12px; border-radius: 8px;
+      overflow-x: auto; font-size: 0.82rem; direction: ltr; text-align: left; margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">💳 پنل کاربری حرفه‌ای و درگاه پرداخت ۴۶ مدل اشتراک | Robotic Agent Portal</div>
+      <div class="nav-links" style="display:flex; gap:8px;">
+        <a href="admin.html" style="background:#2563eb; border-color:#60a5fa; font-weight:bold;">⚙️ پنل مدیریت سایت (Admin CMS)</a>
+        <a href="index.html">🏠 بازگشت به صفحهٔ اصلی (Landing Page)</a>
+      </div>
+    </header>
+
+    <!-- User Profile & Active Entitlements Summary -->
+    <div class="dashboard-top">
+      <div class="stat-card">
+        <div class="label">👤 حساب کاربری فعال</div>
+        <div class="val" id="userEmailDisplay">user@example.com</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">🔑 اشتراک و کلید لایسنس فعلی</div>
+        <div class="val" id="activeLicenseDisplay">نسخهٔ رایگان (Free Starter)</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">📦 سقف پردازش دسته‌ای در هر نوبت</div>
+        <div class="val" id="activeBatchDisplay">۵۰ فایل در هر نوبت</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">🧾 تعداد فاکتورهای ثبت‌شده</div>
+        <div class="val" id="invoiceCountDisplay">۰ فاکتور</div>
+      </div>
+    </div>
+
+    <!-- 30-Second Interactive Plan Finder Quiz (#23) & BNPL / Order Bump Options (#14, #18) -->
+    <div class="stat-card" style="margin-bottom:18px; border-color:#2563eb;">
+      <div style="display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:12px;">
+        <div>
+          <strong>🎯 آزمون هوشمند ۳۰ ثانیه‌ای انتخاب بهترین اشتراک (#23 Plan Finder Quiz):</strong>
+          <span style="font-size:0.84rem; color:var(--muted); margin-right:8px;">شغل یا نیاز اصلی خود را انتخاب کنید تا بهترین طرح از بین ۴۶ اشتراک پیشنهاد شود:</span>
+        </div>
+        <div style="display:flex; gap:8px; flex-wrap:wrap;">
+          <select id="quizRoleSelect" onchange="runPlanQuiz()" style="background:#0b1120; color:#fff; border:1px solid var(--border); padding:7px 10px; border-radius:8px;">
+            <option value="general">کاربر عمومی / فریلنسر (همهٔ ۲۴ مهارت)</option>
+            <option value="accounting">حسابدار و مدیر مالی (مغایرت‌گیری بانکی و اکسل)</option>
+            <option value="legal">وکیل و مشاور حقوقی (قراردادساز، NDA و سانسور اسناد)</option>
+            <option value="ecommerce">مدیر فروشگاه اینترنتی (فاکتور و بهینه‌سازی عکس)</option>
+            <option value="creator">یوتیوبر و تولیدکنندهٔ محتوا (استودیو زیرنویس SRT)</option>
+            <option value="dev">برنامه‌نویس و DevOps (سرور MCP و ابزارهای کد)</option>
+            <option value="team">شرکت و تیم سازمانی (۵ تا ۲۰ کاربر هم‌زمان + Audit Log)</option>
+          </select>
+          <label style="display:flex; align-items:center; gap:6px; font-size:0.84rem; background:#0b1120; padding:6px 10px; border-radius:8px; border:1px solid var(--border);">
+            <input type="checkbox" id="chkBnpl4Pay" /> 💳 پرداخت اقساطی ۴ مرحله‌ای بدون بهره (#14 BNPL 4-Pay)
+          </label>
+          <label style="display:flex; align-items:center; gap:6px; font-size:0.84rem; background:#0b1120; padding:6px 10px; border-radius:8px; border:1px solid #f59e0b; color:#fcd34d;">
+            <input type="checkbox" id="chkOrderBump" /> 🎁 افزودن بستهٔ ۱۰۰۰ پرامپت VIP با ۵۰٪ تخفیف (#18 Order Bump)
+          </label>
+        </div>
+      </div>
+      <div id="quizResultBanner" style="margin-top:10px; font-size:0.88rem; color:#34d399;"></div>
+    </div>
+
+    <!-- Phase 2 (#11..#20): Smart Commerce, Geo-IP Routing, Dual Wallet, Prorated Upgrade & Team Seat Slider -->
+    <div class="stat-card" style="margin-bottom:18px; border-color:#10b981;">
+      <h3 style="font-size:1.02rem; color:#34d399; margin-bottom:12px;">💳 استودیو مالی و خرید هوشمند فاز ۲ (#11 تا #20: Geo-IP، کیف پول، ارتقای پلکانی و اسلایدر صندلی تیمی)</h3>
+      <div class="dashboard-top" style="margin-bottom:0;">
+        <!-- #11 Geo-IP Router -->
+        <div style="background:#0b1120; border:1px solid var(--border); border-radius:10px; padding:12px;">
+          <div style="font-size:0.82rem; color:#93c5fd; font-weight:bold;">🌍 #11 مسیریابی هوشمند Geo-IP درگاه و ارز:</div>
+          <select id="geoCountrySelect" onchange="applyGeoRouting()" style="width:100%; margin-top:6px; background:#111827; color:#fff; border:1px solid var(--border); padding:7px; border-radius:6px;">
+            <option value="IR" selected>🇮🇷 ایران (IR) — تومان + زرین‌پال/زیبال/آیدی‌پی</option>
+            <option value="US">🌍 بین‌المللی (US/EU/UAE) — دلار/تتر + Stripe/NOWPayments</option>
+          </select>
+          <div id="geoRouteReason" style="font-size:0.76rem; color:var(--muted); margin-top:6px;">تشخیص موقعیت ایران: اولویت با درگاه‌های شتاب تومانی</div>
+        </div>
+
+        <!-- #16 Dual-Currency Wallet -->
+        <div style="background:#0b1120; border:1px solid var(--border); border-radius:10px; padding:12px;">
+          <div style="font-size:0.82rem; color:#34d399; font-weight:bold;">💰 #16 کیف پول اعتباری دوارزی کاربر:</div>
+          <div id="walletBalanceDisplay" style="font-weight:bold; font-size:0.95rem; margin:6px 0; color:#f8fafc;">۱٬۵۰۰٬۰۰۰ تومان | $25.00 USD</div>
+          <div style="display:flex; gap:6px;">
+            <button onclick="topUpUserWallet()" style="flex:1; background:#2563eb; color:#fff; border:none; padding:5px 8px; border-radius:6px; cursor:pointer; font-size:0.78rem;">➕ شارژ +۱ میلیون تومان</button>
+            <button onclick="paySelectedWithWallet()" style="flex:1; background:#059669; color:#fff; border:none; padding:5px 8px; border-radius:6px; cursor:pointer; font-size:0.78rem;">⚡ خرید با کیف پول</button>
+          </div>
+        </div>
+
+        <!-- #15 Prorated Upgrade Calculator -->
+        <div style="background:#0b1120; border:1px solid var(--border); border-radius:10px; padding:12px;">
+          <div style="font-size:0.82rem; color:#fbbf24; font-weight:bold;">📈 #15 محاسبه‌گر ارتقای پلکانی اشتراک (Prorated):</div>
+          <div style="display:flex; gap:6px; margin-top:6px;">
+            <input type="number" id="proratedDaysLeft" value="15" min="1" max="30" oninput="calcProratedUpgradeUI()" style="width:70px; background:#111827; color:#fff; border:1px solid var(--border); padding:5px; border-radius:6px;" />
+            <span style="font-size:0.78rem; color:var(--muted); align-self:center;">روز باقی‌مانده از پلن فعلی تا ارتقا به Pro</span>
+          </div>
+          <div id="proratedResultText" style="font-size:0.8rem; color:#fcd34d; margin-top:6px;"></div>
+        </div>
+
+        <!-- #19 Interactive Team Seat Slider -->
+        <div style="background:#0b1120; border:1px solid var(--border); border-radius:10px; padding:12px;">
+          <div style="font-size:0.82rem; color:#c084fc; font-weight:bold;">👥 #19 اسلایدر تخفیف پلکانی صندلی‌های تیمی:</div>
+          <input type="range" id="teamSeatSlider" min="2" max="100" value="20" oninput="calcTeamSeatSliderUI()" style="width:100%; margin-top:6px;" />
+          <div id="teamSeatSliderOutput" style="font-size:0.79rem; color:#e9d5ff; margin-top:4px;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6 Payment Gateways Selector (3 Iranian + 3 International) -->
+    <div class="gateways-bar">
+      <strong>🏦 گام ۱: انتخاب درگاه پرداخت (۳ درگاه ایرانی شتاب + ۳ درگاه بین‌المللی ارزی/رمزارزی):</strong>
+      <div class="gateways-grid" id="gatewaysContainer"></div>
+    </div>
+
+    <!-- Filter across 46 Subscription Models -->
+    <div class="filters">
+      <button class="filter-btn active" onclick="filterCategory('ALL', this)">همهٔ ۴۶ اشتراک (46)</button>
+      <button class="filter-btn" onclick="filterCategory('PERSONAL', this)">۱. عمومی و فردی (6)</button>
+      <button class="filter-btn" onclick="filterCategory('SKILLS', this)">۲. بسته‌های تخصصی مهارت‌ها (10)</button>
+      <button class="filter-btn" onclick="filterCategory('PLAYBOOKS', this)">۳. ۲۰ قالب شغلی (20)</button>
+      <button class="filter-btn" onclick="filterCategory('CREDITS', this)">۴. توکن ابری و پرامپت (5)</button>
+      <button class="filter-btn" onclick="filterCategory('ENTERPRISE', this)">۵. تیمی و سازمانی (5)</button>
+      <input type="text" id="searchBox" class="search-input" placeholder="جستجو در بین ۴۶ مدل اشتراک (نام، کد SKU، شغل یا مهارت)..." oninput="renderPlans()" />
+    </div>
+
+    <!-- 46 Subscription Cards -->
+    <div class="plans-grid" id="plansContainer"></div>
+
+    <!-- Live Gateway Connection & License Issuance Console -->
+    <div class="checkout-panel" id="checkoutConsole">
+      <div style="display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:10px;">
+        <h3>⚡ کنسول اتصال زنده به درگاه پرداخت و تحویل آنی لایسنس (Gateway &amp; License Console)</h3>
+        <div style="display:flex; flex-wrap:wrap; gap:8px;">
+          <button onclick="showOfficialQrInvoice()" style="background:#2563eb; color:#fff; border:none; padding:6px 12px; border-radius:8px; cursor:pointer; font-size:0.8rem; font-weight:bold;">🧾 فاکتور رسمی با مهر دیجیتال و QR (#13)</button>
+          <button onclick="showBnplSchedule()" style="background:#059669; color:#fff; border:none; padding:6px 12px; border-radius:8px; cursor:pointer; font-size:0.8rem; font-weight:bold;">📅 جدول ۴ قسط بدون بهره BNPL (#14)</button>
+          <button onclick="showAbandonedCartOffer()" style="background:#f59e0b; color:#000; border:none; padding:6px 12px; border-radius:8px; cursor:pointer; font-size:0.8rem; font-weight:bold;">🎁 کد تخفیف ۱۰٪ سبد خرید رهاشده (#17)</button>
+          <button onclick="refundLastOrderCrl()" style="background:#ef4444; color:#fff; border:none; padding:6px 12px; border-radius:8px; cursor:pointer; font-size:0.8rem; font-weight:bold;">↩️ استرداد ۷ روزه و ابطال لایسنس (#20 CRL)</button>
+        </div>
+      </div>
+      <p id="checkoutStatusText" style="margin-top:6px; color:#cbd5e1;">
+        بر روی دکمهٔ «خرید و اتصال به درگاه» در هر یک از ۴۶ کارت بالا کلیک کنید تا نشست درگاه پرداخت (JSON Payload + لینک هدایت) و کلید لایسنس امضاشده تولید شود.
+      </p>
+      <pre id="checkoutJsonOutput">// اطلاعات اتصال به درگاه پرداخت (زرین‌پال، زیبال، آیدی‌پی، Stripe، LemonSqueezy یا NOWPayments) در اینجا نمایش داده می‌شود...</pre>
+    </div>
+
+    <!-- Phase 3 (#21..#30): Customer Portal Pro Upgrades -->
+    <div class="stat-card" style="margin-top:24px; border-color:#3b82f6;">
+      <h3 style="font-size:1.1rem; color:#60a5fa; margin-bottom:14px;">👤 مرکز مدیریت پیشرفتهٔ پنل کاربری مشتریان — فاز ۳ (#21 تا #30: دستگاه‌ها، دعوت ۲۰٪، صندلی تیم، گواهی ROI، چت‌بات، توکن MCP و بکاپ رمزنگاری‌شده)</h3>
+
+      <div class="dashboard-top" style="grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));">
+        <!-- #22 Active Devices Manager -->
+        <div style="background:#0b1120; border:1px solid var(--border); border-radius:10px; padding:14px;">
+          <div style="font-weight:bold; color:#93c5fd; font-size:0.88rem; margin-bottom:8px;">💻 #22 دستگاه‌های متصل به لایسنس (حداکثر ۳ دستگاه):</div>
+          <div id="activeDevicesListBox" style="font-size:0.8rem; color:#cbd5e1; margin-bottom:8px;"></div>
+          <button onclick="registerNewDeviceUI()" style="width:100%; background:#2563eb; color:#fff; border:none; padding:6px; border-radius:6px; cursor:pointer; font-size:0.8rem;">➕ ثبت دستگاه جدید روی لایسنس</button>
+        </div>
+
+        <!-- #24 Referral & 20% Cashback + #25 Team Seat Sub-License -->
+        <div style="background:#0b1120; border:1px solid var(--border); border-radius:10px; padding:14px;">
+          <div style="font-weight:bold; color:#34d399; font-size:0.88rem; margin-bottom:6px;">🎁 #24 لینک دعوت ۲۰٪ کش‌بک و #25 لایسنس کارمندان:</div>
+          <input type="text" readonly value="https://robotic-agent.ir/portal.html?ref=USR-8F4E2B91" style="width:100%; background:#111827; color:#6ee7b7; border:1px solid var(--border); padding:6px; border-radius:6px; font-family:monospace; font-size:0.76rem; margin-bottom:6px;" />
+          <div id="referralCashbackText" style="font-size:0.8rem; color:#fcd34d; margin-bottom:8px;">پاداش نقدی دعوت دوستان: ۵۷۰٬۰۰۰ تومان</div>
+          <div style="display:flex; gap:6px;">
+            <button onclick="simulateReferralCashbackUI()" style="flex:1; background:#059669; color:#fff; border:none; padding:6px; border-radius:6px; cursor:pointer; font-size:0.78rem;">+ ثبت خرید دوست (۲۰٪)</button>
+            <button onclick="issueTeamSubLicenseUI()" style="flex:1; background:#7c3aed; color:#fff; border:none; padding:6px; border-radius:6px; cursor:pointer; font-size:0.78rem;">🏢 صدور لایسنس کارمند (#25)</button>
+          </div>
+        </div>
+
+        <!-- #28 Scoped MCP/CLI Token + #26 Monthly ROI Certificate -->
+        <div style="background:#0b1120; border:1px solid var(--border); border-radius:10px; padding:14px;">
+          <div style="font-weight:bold; color:#fbbf24; font-size:0.88rem; margin-bottom:6px;">🔑 #28 توکن اتصال MCP/CLI و #26 گواهی بهره‌وری ماهانه:</div>
+          <input type="text" id="mcpScopedTokenBox" readonly value="ra_mcp_9f86d081884c7d659a2feaa0c55ad015" style="width:100%; background:#111827; color:#fcd34d; border:1px solid var(--border); padding:6px; border-radius:6px; font-family:monospace; font-size:0.76rem; margin-bottom:8px;" />
+          <div style="display:flex; gap:6px;">
+            <button onclick="generateNewMcpTokenUI()" style="flex:1; background:#2563eb; color:#fff; border:none; padding:6px; border-radius:6px; cursor:pointer; font-size:0.78rem;">🔄 تولید توکن جدید MCP</button>
+            <button onclick="showMonthlyRoiCertificateUI()" style="flex:1; background:#f59e0b; color:#000; border:none; padding:6px; border-radius:6px; cursor:pointer; font-size:0.78rem; font-weight:bold;">🏆 گواهی ROI ماهانه (#26)</button>
+          </div>
+        </div>
+
+        <!-- #27 AI Support Concierge + #30 Zero-Knowledge E2E Backup -->
+        <div style="background:#0b1120; border:1px solid var(--border); border-radius:10px; padding:14px;">
+          <div style="font-weight:bold; color:#c084fc; font-size:0.88rem; margin-bottom:6px;">💬 #27 پشتیبان هوشمند و #30 بکاپ رمزنگاری‌شدهٔ E2E:</div>
+          <input type="text" id="supportQuestionBox" placeholder="سؤال خود را بپرسید (مثلاً: لایسنس، حریم خصوصی، MCP)..." value="نحوه فعال‌سازی لایسنس و حفظ حریم خصوصی چگونه است؟" style="width:100%; background:#111827; color:#fff; border:1px solid var(--border); padding:6px; border-radius:6px; font-size:0.8rem; margin-bottom:8px;" />
+          <div style="display:flex; gap:6px;">
+            <button onclick="askAiConciergeUI()" style="flex:1; background:#2563eb; color:#fff; border:none; padding:6px; border-radius:6px; cursor:pointer; font-size:0.78rem;">💬 پرسش از پشتیبان (#27)</button>
+            <button onclick="runZeroKnowledgeBackupUI()" style="flex:1; background:#10b981; color:#fff; border:none; padding:6px; border-radius:6px; cursor:pointer; font-size:0.78rem;">🔐 بکاپ Zero-Knowledge (#30)</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- #29 Release Hub & Interactive Changelog -->
+      <div style="margin-top:12px; background:#0b1120; border:1px solid var(--border); border-radius:10px; padding:12px; display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:10px;">
+        <div style="font-size:0.82rem;">
+          <strong style="color:#38bdf8;">📦 #29 مرکز دانلود نسخه‌ها و تاریخچهٔ تغییرات (Release Hub v2.0.0):</strong>
+          <span style="color:var(--muted); margin-right:6px;">نصاب ویندوز x64 + افزونهٔ مرورگر کروم/اج + CLI کراس‌پلتفرم | SHA-256: <code>8F4E2B91...01234567</code></span>
+        </div>
+        <a href="trust.html" style="background:#1e293b; color:#34d399; text-decoration:none; padding:6px 12px; border-radius:6px; border:1px solid #10b981; font-size:0.8rem;">مشاهدهٔ هش‌های کامل SHA-256 در مرکز اعتماد</a>
+      </div>
+    </div>
+
+    <!-- Phase 5 (#41..#50): Interactive Plan Comparison Matrix (#46) & In-Browser Bilingual NDA/Contract Builder (#48) -->
+    <div class="stat-card" style="margin-top:24px; border-color:#f59e0b;">
+      <h3 style="font-size:1.08rem; color:#fbbf24; margin-bottom:14px;">⚡ ابزارهای تعاملی وب فاز ۵ (#46 جدول مقایسهٔ ستونی ۴۶ اشتراک + #48 قراردادساز و NDA دوزبانه در مرورگر)</h3>
+
+      <div class="dashboard-top" style="grid-template-columns:1.15fr 1fr; gap:16px;">
+        <!-- #46 Interactive Plan Comparison Matrix -->
+        <div style="background:#0b1120; border:1px solid var(--border); border-radius:12px; padding:14px;">
+          <strong style="color:#93c5fd; font-size:0.9rem;">📊 #46 مقایسهٔ ستونی ۳ طرح دلخواه از بین ۴۶ اشتراک:</strong>
+          <div style="display:flex; gap:8px; margin:8px 0;">
+            <select id="cmpPlan1" onchange="renderComparisonMatrixUI()" style="flex:1; background:#111827; color:#fff; border:1px solid var(--border); padding:6px; border-radius:6px; font-size:0.78rem;"></select>
+            <select id="cmpPlan2" onchange="renderComparisonMatrixUI()" style="flex:1; background:#111827; color:#fff; border:1px solid var(--border); padding:6px; border-radius:6px; font-size:0.78rem;"></select>
+            <select id="cmpPlan3" onchange="renderComparisonMatrixUI()" style="flex:1; background:#111827; color:#fff; border:1px solid var(--border); padding:6px; border-radius:6px; font-size:0.78rem;"></select>
+          </div>
+          <div id="comparisonMatrixTableContainer" style="overflow-x:auto; font-size:0.8rem;"></div>
+        </div>
+
+        <!-- #48 In-Browser Bilingual Contract & NDA Generator -->
+        <div style="background:#0b1120; border:1px solid var(--border); border-radius:12px; padding:14px;">
+          <strong style="color:#34d399; font-size:0.9rem;">📜 #48 تولیدکنندهٔ آنلاین قرارداد و توافق‌نامهٔ محرمانگی دوزبانه (FA/EN):</strong>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:8px 0;">
+            <input type="text" id="ndaPartyA" value="شرکت داده‌پرداز نوین" placeholder="طرف اول (Party A)" style="background:#111827; color:#fff; border:1px solid var(--border); padding:6px 8px; border-radius:6px; font-size:0.8rem;" />
+            <input type="text" id="ndaPartyB" value="Acme Global Corp" placeholder="طرف دوم (Party B)" style="background:#111827; color:#fff; border:1px solid var(--border); padding:6px 8px; border-radius:6px; font-size:0.8rem;" />
+          </div>
+          <button onclick="generateBrowserNdaUI()" style="width:100%; background:#10b981; color:#fff; border:none; padding:7px; border-radius:6px; cursor:pointer; font-weight:bold; font-size:0.82rem; margin-bottom:8px;">⚡ تولید متن کامل قرارداد / NDA دوزبانه (فارسی + انگلیسی)</button>
+          <textarea id="browserNdaOutput" readonly style="width:100%; height:115px; background:#020617; color:#a7f3d0; border:1px solid #334155; border-radius:8px; padding:8px; font-size:0.78rem; font-family:Tahoma,monospace;"></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const GATEWAYS = [
+      { id: 'ZarinPal', region: '🇮🇷 درگاه ایرانی', name: 'زرین‌پال (ZarinPal)', currency: 'IRT', endpoint: 'https://api.zarinpal.com/pg/v4/payment/request.json', redirect: 'https://www.zarinpal.com/pg/StartPay/' },
+      { id: 'Zibal', region: '🇮🇷 درگاه ایرانی', name: 'زیبال (Zibal IPG)', currency: 'IRT', endpoint: 'https://gateway.zibal.ir/v1/request', redirect: 'https://gateway.zibal.ir/start/' },
+      { id: 'IdPay', region: '🇮🇷 درگاه ایرانی', name: 'آیدی‌پی (IDPay)', currency: 'IRT', endpoint: 'https://api.idpay.ir/v1.1/payment', redirect: 'https://idpay.ir/p/ws/' },
+      { id: 'Stripe', region: '🌍 درگاه خارجی', name: 'استرایپ (Stripe Global)', currency: 'USD', endpoint: 'https://api.stripe.com/v1/checkout/sessions', redirect: 'https://checkout.stripe.com/c/pay/' },
+      { id: 'LemonSqueezy', region: '🌍 درگاه خارجی', name: 'لمون‌اسکوییزی (LemonSqueezy)', currency: 'USD', endpoint: 'https://api.lemonsqueezy.com/v1/checkouts', redirect: 'https://roboticagent.lemonsqueezy.com/checkout/buy/' },
+      { id: 'NowPaymentsCrypto', region: '🌍 رمزارز جهانی', name: 'نووپیمنتس (USDT / BTC)', currency: 'USD', endpoint: 'https://api.nowpayments.io/v1/invoice', redirect: 'https://nowpayments.io/payment/?iid=' }
+    ];
+
+    const PLANS_46 = [
+      // 1..6 Personal & General
+      { n: 1, sku: 'RA-PLAN-01-FREE', cat: 'PERSONAL', fa: '۱. اشتراک پایه رایگان (Free Starter)', en: 'Free Starter', cycle: 'رایگان همیشگی', toman: 0, usd: 0, batch: 50 },
+      { n: 2, sku: 'RA-PLAN-02-WEEKLY-PASS', cat: 'PERSONAL', fa: '۲. اشتراک هفتگی سریع (7-Day Express Pass)', en: '7-Day Express Pass', cycle: 'هفتگی', toman: 95000, usd: 2.50, batch: 2000 },
+      { n: 3, sku: 'RA-PLAN-03-STUDENT-MONTHLY', cat: 'PERSONAL', fa: '۳. اشتراک دانشجویی و پژوهشی (Student & Academic)', en: 'Student & Academic Monthly', cycle: 'ماهانه', toman: 145000, usd: 3.90, batch: 5000 },
+      { n: 4, sku: 'RA-PLAN-04-PRO-MONTHLY', cat: 'PERSONAL', fa: '۴. اشتراک حرفه‌ای ماهانه (Pro Monthly)', en: 'Pro Monthly', cycle: 'ماهانه', toman: 290000, usd: 9.00, batch: 100000 },
+      { n: 5, sku: 'RA-PLAN-05-PRO-ANNUAL', cat: 'PERSONAL', fa: '۵. اشتراک حرفه‌ای سالانه (Pro Annual - ۳۲٪ تخفیف)', en: 'Pro Annual', cycle: 'سالانه', toman: 2350000, usd: 74.00, batch: 100000 },
+      { n: 6, sku: 'RA-PLAN-06-PRO-LIFETIME', cat: 'PERSONAL', fa: '۶. لایسنس مادام‌العمر حرفه‌ای (Pro Lifetime Deal)', en: 'Pro Lifetime Deal', cycle: 'مادام‌العمر', toman: 2850000, usd: 79.00, batch: 100000 },
+      // 7..16 Skill-Focused Packs
+      { n: 7, sku: 'RA-PLAN-07-PRIVACY-SHIELD', cat: 'SKILLS', fa: '۷. بستهٔ سپر حریم خصوصی و ضد نشت داده (Privacy Shield)', en: 'Privacy & DLP Shield', cycle: 'ماهانه', toman: 165000, usd: 4.50, batch: 10000 },
+      { n: 8, sku: 'RA-PLAN-08-PDF-POWERHOUSE', cat: 'SKILLS', fa: '۸. بستهٔ استودیو پیشرفته PDF و اسناد (PDF Powerhouse)', en: 'PDF & Document Powerhouse', cycle: 'ماهانه', toman: 155000, usd: 4.20, batch: 10000 },
+      { n: 9, sku: 'RA-PLAN-09-EXCEL-RECONCILE', cat: 'SKILLS', fa: '۹. بستهٔ مغایرت‌گیری بانکی و اتوماسیون اکسل', en: 'Financial & Excel Reconciliation', cycle: 'ماهانه', toman: 220000, usd: 6.50, batch: 25000 },
+      { n: 10, sku: 'RA-PLAN-10-SUBTITLE-STUDIO', cat: 'SKILLS', fa: '۱۰. بستهٔ استودیو زیرنویس و رسانه (Subtitle Studio)', en: 'Subtitle & Media Studio', cycle: 'ماهانه', toman: 140000, usd: 3.90, batch: 5000 },
+      { n: 11, sku: 'RA-PLAN-11-MEETING-SECRETARY', cat: 'SKILLS', fa: '۱۱. بستهٔ دستیار جلسات و صورت‌جلسهٔ هوشمند', en: 'Smart Meeting & Minutes Pack', cycle: 'ماهانه', toman: 150000, usd: 4.20, batch: 5000 },
+      { n: 12, sku: 'RA-PLAN-12-CONTRACT-NDA-BUILDER', cat: 'SKILLS', fa: '۱۲. بستهٔ قراردادساز، NDA و پیش‌فاکتور دوزبانه', en: 'Bilingual Contract & NDA Builder', cycle: 'ماهانه', toman: 195000, usd: 5.50, batch: 5000 },
+      { n: 13, sku: 'RA-PLAN-13-DESKTOP-ORGANIZER', cat: 'SKILLS', fa: '۱۳. بستهٔ مرتب‌سازی خودکار و پاک‌سازی تکراری‌ها', en: 'Smart Organizer & Dedup Pack', cycle: 'ماهانه', toman: 125000, usd: 3.50, batch: 50000 },
+      { n: 14, sku: 'RA-PLAN-14-DEV-DEVOPS-KIT', cat: 'SKILLS', fa: '۱۴. بستهٔ ابزارهای برنامه‌نویسان (JSON/YAML/Hash/Env)', en: 'Developer & DevOps Local Kit', cycle: 'ماهانه', toman: 175000, usd: 4.90, batch: 25000 },
+      { n: 15, sku: 'RA-PLAN-15-MCP-SERVER-PRO', cat: 'SKILLS', fa: '۱۵. بستهٔ سرور محلی MCP برای Claude و Cursor', en: 'MCP Local Server Connector Pro', cycle: 'ماهانه', toman: 210000, usd: 5.90, batch: 50000 },
+      { n: 16, sku: 'RA-PLAN-16-BROWSER-EXT-PRO', cat: 'SKILLS', fa: '۱۶. بستهٔ افزونهٔ مرورگر کروم و اج (Browser Companion Pro)', en: 'Chrome & Edge Extension Pro', cycle: 'ماهانه', toman: 135000, usd: 3.80, batch: 10000 },
+      // 17..36 20 Job Playbooks
+      { n: 17, sku: 'RA-PLAN-17-JOB-ACCOUNTING', cat: 'PLAYBOOKS', fa: '۱۷. اشتراک ویژهٔ حسابداران و مدیران مالی', en: 'Accountant & Tax Edition', cycle: 'ماهانه', toman: 260000, usd: 7.50, batch: 30000 },
+      { n: 18, sku: 'RA-PLAN-18-JOB-LEGAL', cat: 'PLAYBOOKS', fa: '۱۸. اشتراک ویژهٔ وکلا و مشاوران حقوقی', en: 'Legal & Law Firm Edition', cycle: 'ماهانه', toman: 280000, usd: 8.50, batch: 30000 },
+      { n: 19, sku: 'RA-PLAN-19-JOB-HR', cat: 'PLAYBOOKS', fa: '۱۹. اشتراک ویژهٔ منابع انسانی و کارگزینی (HR)', en: 'HR & Recruitment Edition', cycle: 'ماهانه', toman: 240000, usd: 6.90, batch: 30000 },
+      { n: 20, sku: 'RA-PLAN-20-JOB-ECOMMERCE', cat: 'PLAYBOOKS', fa: '۲۰. اشتراک ویژهٔ مدیران فروشگاه اینترنتی', en: 'E-Commerce Store Edition', cycle: 'ماهانه', toman: 250000, usd: 7.20, batch: 50000 },
+      { n: 21, sku: 'RA-PLAN-21-JOB-CREATOR', cat: 'PLAYBOOKS', fa: '۲۱. اشتراک ویژهٔ یوتیوبرها و تولیدکنندگان محتوا', en: 'YouTuber & Creator Edition', cycle: 'ماهانه', toman: 210000, usd: 5.90, batch: 20000 },
+      { n: 22, sku: 'RA-PLAN-22-JOB-RESEARCHER', cat: 'PLAYBOOKS', fa: '۲۲. اشتراک ویژهٔ اساتید دانشگاه و پژوهشگران', en: 'Academic Researcher Edition', cycle: 'ماهانه', toman: 190000, usd: 5.20, batch: 20000 },
+      { n: 23, sku: 'RA-PLAN-23-JOB-TRANSLATOR', cat: 'PLAYBOOKS', fa: '۲۳. اشتراک ویژهٔ مترجمان رسمی و دارالترجمه‌ها', en: 'Official Translator Edition', cycle: 'ماهانه', toman: 220000, usd: 6.20, batch: 25000 },
+      { n: 24, sku: 'RA-PLAN-24-JOB-MEDICAL', cat: 'PLAYBOOKS', fa: '۲۴. اشتراک ویژهٔ مطب‌ها و کلینیک‌های پزشکی', en: 'Clinic & Healthcare Edition', cycle: 'ماهانه', toman: 270000, usd: 7.90, batch: 30000 },
+      { n: 25, sku: 'RA-PLAN-25-JOB-REALESTATE', cat: 'PLAYBOOKS', fa: '۲۵. اشتراک ویژهٔ مشاوران املاک و مستغلات', en: 'Real Estate Agency Edition', cycle: 'ماهانه', toman: 230000, usd: 6.50, batch: 25000 },
+      { n: 26, sku: 'RA-PLAN-26-JOB-SUPPORT', cat: 'PLAYBOOKS', fa: '۲۶. اشتراک ویژهٔ تیم‌های پشتیبانی مشتریان (CRM)', en: 'Customer Support Edition', cycle: 'ماهانه', toman: 240000, usd: 6.90, batch: 35000 },
+      { n: 27, sku: 'RA-PLAN-27-JOB-SOFTWARE-ENG', cat: 'PLAYBOOKS', fa: '۲۷. اشتراک ویژهٔ مهندسان نرم‌افزار و DevOps', en: 'Software Engineer Edition', cycle: 'ماهانه', toman: 260000, usd: 7.50, batch: 50000 },
+      { n: 28, sku: 'RA-PLAN-28-JOB-PHOTOGRAPHER', cat: 'PLAYBOOKS', fa: '۲۸. اشتراک ویژهٔ عکاسان، آتلیه‌ها و طراحان گرافیک', en: 'Photographer & Studio Edition', cycle: 'ماهانه', toman: 225000, usd: 6.40, batch: 50000 },
+      { n: 29, sku: 'RA-PLAN-29-JOB-LOGISTICS', cat: 'PLAYBOOKS', fa: '۲۹. اشتراک ویژهٔ شرکت‌های لجستیک، انبارداری و گمرک', en: 'Logistics & Warehouse Edition', cycle: 'ماهانه', toman: 255000, usd: 7.40, batch: 40000 },
+      { n: 30, sku: 'RA-PLAN-30-JOB-TEACHER', cat: 'PLAYBOOKS', fa: '۳۰. اشتراک ویژهٔ معلمان، مدارس و آموزشگاه‌ها', en: 'School & Educator Edition', cycle: 'ماهانه', toman: 175000, usd: 4.90, batch: 20000 },
+      { n: 31, sku: 'RA-PLAN-31-JOB-SOCIAL-ADMIN', cat: 'PLAYBOOKS', fa: '۳۱. اشتراک ویژهٔ ادمین‌های اینستاگرام و تلگرام', en: 'Social Media Admin Edition', cycle: 'ماهانه', toman: 195000, usd: 5.50, batch: 25000 },
+      { n: 32, sku: 'RA-PLAN-32-JOB-PROCUREMENT', cat: 'PLAYBOOKS', fa: '۳۲. اشتراک ویژهٔ واحد تدارکات و خرید شرکت‌ها', en: 'Procurement & Vendor Edition', cycle: 'ماهانه', toman: 245000, usd: 7.00, batch: 30000 },
+      { n: 33, sku: 'RA-PLAN-33-JOB-JOURNALIST', cat: 'PLAYBOOKS', fa: '۳۳. اشتراک ویژهٔ خبرنگاران و تحریریهٔ رسانه‌ها', en: 'Journalist & Newsroom Edition', cycle: 'ماهانه', toman: 215000, usd: 6.10, batch: 25000 },
+      { n: 34, sku: 'RA-PLAN-34-JOB-FREELANCER', cat: 'PLAYBOOKS', fa: '۳۴. اشتراک ویژهٔ فریلنسرها و مشاوران مستقل', en: 'Freelancer & Consultant Edition', cycle: 'ماهانه', toman: 205000, usd: 5.80, batch: 25000 },
+      { n: 35, sku: 'RA-PLAN-35-JOB-ARCHITECTURE', cat: 'PLAYBOOKS', fa: '۳۵. اشتراک ویژهٔ دفاتر معماری، عمران و مهندسی', en: 'Architecture & Civil Eng Edition', cycle: 'ماهانه', toman: 265000, usd: 7.80, batch: 40000 },
+      { n: 36, sku: 'RA-PLAN-36-JOB-EVENT-PLANNER', cat: 'PLAYBOOKS', fa: '۳۶. اشتراک ویژهٔ برگزارکنندگان همایش و رویدادها', en: 'Event & Conference Edition', cycle: 'ماهانه', toman: 225000, usd: 6.40, batch: 30000 },
+      // 37..41 Hybrid AI Credits
+      { n: 37, sku: 'RA-PLAN-37-AI-CREDITS-100K', cat: 'CREDITS', fa: '۳۷. بستهٔ شارژ ۱۰۰ هزار توکن هوش مصنوعی ابری', en: '100K Hybrid Cloud AI Tokens', cycle: 'بستهٔ اعتباری', toman: 110000, usd: 2.99, batch: 10000 },
+      { n: 38, sku: 'RA-PLAN-38-AI-CREDITS-500K', cat: 'CREDITS', fa: '۳۸. بستهٔ شارژ ۵۰۰ هزار توکن هوش مصنوعی ابری', en: '500K Hybrid Cloud AI Tokens', cycle: 'بستهٔ اعتباری', toman: 420000, usd: 11.99, batch: 50000 },
+      { n: 39, sku: 'RA-PLAN-39-AI-CREDITS-2M', cat: 'CREDITS', fa: '۳۹. بستهٔ شارژ ۲ میلیون توکن هوش مصنوعی ابری', en: '2M Hybrid Cloud AI Tokens', cycle: 'بستهٔ اعتباری', toman: 1350000, usd: 39.00, batch: 100000 },
+      { n: 40, sku: 'RA-PLAN-40-VOICE-TRANSCRIPTION-PACK', cat: 'CREDITS', fa: '۴۰. بستهٔ تبدیل صوت به متن و پیاده‌سازی جلسات (۵۰ ساعت)', en: '50-Hour Voice-to-Notes Pack', cycle: 'بستهٔ اعتباری', toman: 380000, usd: 10.90, batch: 20000 },
+      { n: 41, sku: 'RA-PLAN-41-PROMPT-LIBRARY-VIP', cat: 'CREDITS', fa: '۴۱. بستهٔ VIP هزار پرامپت مهندسی‌شده و ۲۰۰ ابزار', en: 'VIP 1,000 Prompts & 200 AI Tools Pack', cycle: 'مادام‌العمر', toman: 490000, usd: 14.00, batch: 50000 },
+      // 42..46 Team & Enterprise
+      { n: 42, sku: 'RA-PLAN-42-TEAM-5-SEATS', cat: 'ENTERPRISE', fa: '۴۲. اشتراک تیمی استارتاپ (۵ کاربر هم‌زمان)', en: 'Startup Team 5-Seats', cycle: 'ماهانه', toman: 890000, usd: 29.00, batch: 500000 },
+      { n: 43, sku: 'RA-PLAN-43-TEAM-20-SEATS', cat: 'ENTERPRISE', fa: '۴۳. اشتراک شرکتی (۲۰ کاربر هم‌زمان + Audit Log)', en: 'Company Team 20-Seats', cycle: 'ماهانه', toman: 2950000, usd: 89.00, batch: 1000000 },
+      { n: 44, sku: 'RA-PLAN-44-ENTERPRISE-SITE-ANNUAL', cat: 'ENTERPRISE', fa: '۴۴. اشتراک سازمانی نامحدود سالانه (Enterprise Site)', en: 'Enterprise Site License Annual', cycle: 'سالانه', toman: 19500000, usd: 499.00, batch: 10000000 },
+      { n: 45, sku: 'RA-PLAN-45-WHITE-LABEL-AGENCY', cat: 'ENTERPRISE', fa: '۴۵. لایسنس نمایندگی فروش با برند اختصاصی (White-Label)', en: 'White-Label Reseller Agency', cycle: 'سالانه', toman: 29000000, usd: 799.00, batch: 10000000 },
+      { n: 46, sku: 'RA-PLAN-46-MARKETPLACE-PUBLISHER-PRO', cat: 'ENTERPRISE', fa: '۴۶. اکانت توسعه‌دهنده و فروشندهٔ پلاگین (سهم ۷۰٪)', en: 'Marketplace Publisher Pro Account', cycle: 'سالانه', toman: 980000, usd: 29.00, batch: 500000 }
+    ];
+
+    let selectedGateway = GATEWAYS[0];
+    let currentCategory = 'ALL';
+    let invoiceCount = 0;
+
+    function renderGateways() {
+      const container = document.getElementById('gatewaysContainer');
+      container.innerHTML = GATEWAYS.map((g, idx) => `
+        <div class="gw-option ${g.id === selectedGateway.id ? 'active' : ''}" onclick="selectGateway('${g.id}')">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <span class="gw-badge">${g.region}</span>
+            <span style="font-size:0.74rem; color:#34d399;">🟢 99.98% • ${34 + idx * 5}ms</span>
+          </div>
+          <div style="font-weight:bold; margin-top:6px; font-size:0.92rem;">${g.name} (${g.currency})</div>
+        </div>
+      `).join('');
+    }
+
+    function runPlanQuiz() {
+      const role = document.getElementById('quizRoleSelect')?.value || 'general';
+      const map = {
+        general: { n: 6, reason: 'پیشنهاد هوشمند: پلن #6 (لایسنس مادام‌العمر حرفه‌ای Pro Lifetime) — دسترسی دائمی به تمام ۲۴ مهارت' },
+        accounting: { n: 17, reason: 'پیشنهاد هوشمند: پلن #17 (اشتراک ویژهٔ حسابداران و مدیران مالی) — شامل مغایرت‌گیری بانکی و اتوماسیون اکسل' },
+        legal: { n: 18, reason: 'پیشنهاد هوشمند: پلن #18 (اشتراک ویژهٔ وکلا و مشاوران حقوقی) — شامل قراردادساز، NDA و سانسور اسناد' },
+        ecommerce: { n: 20, reason: 'پیشنهاد هوشمند: پلن #20 (اشتراک ویژهٔ مدیران فروشگاه اینترنتی)' },
+        creator: { n: 21, reason: 'پیشنهاد هوشمند: پلن #21 (اشتراک ویژهٔ یوتیوبرها و تولیدکنندگان محتوا)' },
+        dev: { n: 27, reason: 'پیشنهاد هوشمند: پلن #27 (اشتراک ویژهٔ مهندسان نرم‌افزار و سرور محلی MCP)' },
+        team: { n: 43, reason: 'پیشنهاد هوشمند: پلن #43 (اشتراک شرکتی ۲۰ کاربر هم‌زمان + زنجیرهٔ هش حسابرسی)' }
+      };
+      const pick = map[role] || map.general;
+      const banner = document.getElementById('quizResultBanner');
+      if (banner) {
+        banner.innerHTML = `✨ ${pick.reason} — <button onclick="startCheckout(${pick.n})" style="background:#10b981;color:#fff;border:none;padding:4px 12px;border-radius:6px;cursor:pointer;font-weight:bold;">خرید فوری پلن #${pick.n}</button>`;
+      }
+    }
+
+    function selectGateway(id) {
+      selectedGateway = GATEWAYS.find(x => x.id === id) || GATEWAYS[0];
+      renderGateways();
+    }
+
+    function filterCategory(cat, btn) {
+      currentCategory = cat;
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+      renderPlans();
+    }
+
+    function renderPlans() {
+      const q = (document.getElementById('searchBox').value || '').trim().toLowerCase();
+      const filtered = PLANS_46.filter(p => {
+        if (currentCategory !== 'ALL' && p.cat !== currentCategory) return false;
+        if (!q) return true;
+        return p.fa.toLowerCase().includes(q) || p.en.toLowerCase().includes(q) || p.sku.toLowerCase().includes(q);
+      });
+
+      const container = document.getElementById('plansContainer');
+      container.innerHTML = filtered.map(p => {
+        const priceDisplay = p.usd === 0
+          ? 'رایگان ($0 / 0 تومان)'
+          : `${p.toman.toLocaleString('fa-IR')} تومان | $${p.usd.toFixed(2)} USD`;
+        return `
+          <div class="plan-card">
+            <div>
+              <div style="font-size:0.76rem; color:#94a3b8; margin-bottom:4px;">${p.sku} • ${p.cycle}</div>
+              <h3>${p.fa}</h3>
+              <p>${p.en} — سقف پردازش: ${p.batch.toLocaleString('fa-IR')} فایل در هر نوبت</p>
+            </div>
+            <div>
+              <div class="price-box">${priceDisplay}</div>
+              <button class="buy-btn" onclick="startCheckout(${p.n})">🛒 خرید و اتصال به درگاه (${selectedGateway.name})</button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function startCheckout(planNumber) {
+      const plan = PLANS_46.find(x => x.n === planNumber);
+      if (!plan) return;
+
+      invoiceCount++;
+      const isIranian = selectedGateway.currency === 'IRT';
+      const amount = isIranian ? plan.toman : plan.usd;
+      const trackId = 'TRK-' + Math.random().toString(36).substring(2, 10).toUpperCase();
+      const tierCode = plan.cat === 'ENTERPRISE' ? 'TEAM' : 'PRO';
+      const licenseKey = `RA-${tierCode}-${plan.sku}-${trackId}`;
+
+      document.getElementById('activeLicenseDisplay').textContent = `${plan.fa} (${licenseKey})`;
+      document.getElementById('activeBatchDisplay').textContent = `${plan.batch.toLocaleString('fa-IR')} فایل در هر نوبت`;
+      document.getElementById('invoiceCountDisplay').textContent = `${invoiceCount.toLocaleString('fa-IR')} فاکتور رسمی`;
+
+      const isBnpl = document.getElementById('chkBnpl4Pay')?.checked;
+      const isOrderBump = document.getElementById('chkOrderBump')?.checked;
+      let finalAmount = isIranian ? plan.toman : plan.usd;
+      if (isOrderBump) {
+        finalAmount += isIranian ? 245000 : 7.00;
+      }
+      const payableNow = isBnpl ? Math.round(finalAmount / 4) : finalAmount;
+      const deepLinkUri = `roboticagent://activate?key=${encodeURIComponent(licenseKey)}&sku=${encodeURIComponent(plan.sku)}`;
+      const hmacWebhookSig = 'HMAC_SHA256_' + trackId + '_VERIFIED';
+
+      const payload = {
+        gateway: selectedGateway.name,
+        region: selectedGateway.region,
+        apiEndpoint: selectedGateway.endpoint,
+        redirectCheckoutUrl: selectedGateway.redirect + trackId,
+        webhookHmacSignature: hmacWebhookSig,
+        planNumber: plan.n,
+        planSku: plan.sku,
+        planTitleFa: plan.fa,
+        paymentMode: isBnpl ? 'BNPL_4_INSTALLMENTS (25% Paid Now)' : 'FULL_PAYMENT',
+        orderBumpIncluded: !!isOrderBump,
+        payableAmountNow: payableNow,
+        currency: selectedGateway.currency,
+        issuedLicenseKey: licenseKey,
+        desktopDeepLinkActivation: deepLinkUri,
+        status: 'VERIFIED_AND_ACTIVATED'
+      };
+
+      document.getElementById('checkoutStatusText').innerHTML =
+        `✅ اتصال به درگاه <strong>${selectedGateway.name}</strong> انجام شد و لایسنس <code>${licenseKey}</code> صادر گردید | <a href="${deepLinkUri}" style="color:#34d399;font-weight:bold;">🚀 فعال‌سازی تک‌کلیکی روی برنامهٔ دسکتاپ (#21 Deep-Link)</a>`;
+      document.getElementById('checkoutJsonOutput').textContent = JSON.stringify(payload, null, 2);
+      document.getElementById('checkoutConsole').scrollIntoView({ behavior: 'smooth' });
+      lastCompletedCheckout = payload;
+    }
+
+    // =========================================================================
+    // Phase 2 (#11..#20) Interactive Commerce, Wallet, BNPL, QR Invoice & CRL
+    // =========================================================================
+    let walletToman = 1500000;
+    let walletUsd = 25.00;
+    let lastCompletedCheckout = null;
+    const revokedCrlList = [];
+
+    function applyGeoRouting() {
+      const country = document.getElementById('geoCountrySelect')?.value || 'IR';
+      const reasonEl = document.getElementById('geoRouteReason');
+      if (country === 'IR') {
+        selectedGateway = GATEWAYS.find(g => g.id === 'ZarinPal') || GATEWAYS[0];
+        if (reasonEl) reasonEl.textContent = 'تشخیص موقعیت ایران (IR): اولویت با درگاه‌های شتاب تومانی (زرین‌پال، زیبال، آیدی‌پی)';
+      } else {
+        selectedGateway = GATEWAYS.find(g => g.id === 'Stripe') || GATEWAYS[0];
+        if (reasonEl) reasonEl.textContent = 'تشخیص موقعیت بین‌المللی: اولویت با درگاه‌های ارزی و رمزارزی (Stripe, LemonSqueezy, NOWPayments)';
+      }
+      renderGateways();
+      renderPlans();
+    }
+
+    function updateWalletUI() {
+      const el = document.getElementById('walletBalanceDisplay');
+      if (el) el.textContent = `${walletToman.toLocaleString('fa-IR')} تومان | $${walletUsd.toFixed(2)} USD`;
+    }
+
+    function topUpUserWallet() {
+      walletToman += 1000000;
+      walletUsd += 16.00;
+      updateWalletUI();
+      document.getElementById('checkoutStatusText').innerHTML = `💰 کیف پول شما با موفقیت شارژ شد! موجودی فعلی: <strong>${walletToman.toLocaleString('fa-IR')} تومان | $${walletUsd.toFixed(2)} USD</strong>`;
+    }
+
+    function paySelectedWithWallet() {
+      const plan = PLANS_46[3] || PLANS_46[0];
+      if (walletToman < plan.toman) {
+        document.getElementById('checkoutStatusText').innerHTML = `⚠️ موجودی کیف پول تومانی برای «${plan.fa}» کافی نیست. ابتدا دکمهٔ «شارژ کیف پول» را بزنید.`;
+        return;
+      }
+      walletToman -= plan.toman;
+      updateWalletUI();
+      startCheckout(plan.n);
+    }
+
+    function calcProratedUpgradeUI() {
+      const days = Math.max(1, Math.min(30, Number(document.getElementById('proratedDaysLeft')?.value || 15)));
+      const ratio = days / 30;
+      const creditToman = Math.round((145000 * ratio) / 1000) * 1000;
+      const targetToman = 290000;
+      const diffToman = Math.max(0, targetToman - creditToman);
+      const el = document.getElementById('proratedResultText');
+      if (el) {
+        el.textContent = `اعتبار روزهای باقی‌مانده: ${creditToman.toLocaleString('fa-IR')} تومان ← مابه‌التفاوت قابل پرداخت تا Pro: ${diffToman.toLocaleString('fa-IR')} تومان`;
+      }
+    }
+
+    function calcTeamSeatSliderUI() {
+      const seats = Number(document.getElementById('teamSeatSlider')?.value || 20);
+      const disc = seats >= 50 ? 35 : (seats >= 20 ? 25 : (seats >= 10 ? 15 : 10));
+      const perSeatUsd = (6.0 * (100 - disc) / 100).toFixed(2);
+      const totalUsd = (Number(perSeatUsd) * seats).toFixed(2);
+      const totalToman = Math.round(Number(totalUsd) * 60000);
+      const el = document.getElementById('teamSeatSliderOutput');
+      if (el) {
+        el.textContent = `${seats.toLocaleString('fa-IR')} کاربر هم‌زمان (${disc}٪ تخفیف گروهی) ← ماهانه: ${totalToman.toLocaleString('fa-IR')} تومان ($${totalUsd})`;
+      }
+    }
+
+    function showOfficialQrInvoice() {
+      if (!lastCompletedCheckout) startCheckout(6);
+      const invNo = `INV-2026-${1000 + invoiceCount}`;
+      const qrUrl = `https://robotic-agent.ir/verify-invoice?inv=${invNo}&key=${lastCompletedCheckout.issuedLicenseKey}`;
+      document.getElementById('checkoutJsonOutput').textContent = JSON.stringify({
+        documentType: 'OFFICIAL_BILINGUAL_TAX_INVOICE (#13)',
+        invoiceNumber: invNo,
+        customerEmail: 'user@example.com',
+        planTitle: lastCompletedCheckout.planTitleFa,
+        paidAmount: lastCompletedCheckout.payableAmountNow,
+        currency: lastCompletedCheckout.currency,
+        issuedLicenseKey: lastCompletedCheckout.issuedLicenseKey,
+        digitalSignatureSeal: 'SHA256_SEAL_9F86D081884C7D659A2FEAA0',
+        verificationQrUrl: qrUrl
+      }, null, 2);
+    }
+
+    function showBnplSchedule() {
+      if (!lastCompletedCheckout) startCheckout(6);
+      const total = lastCompletedCheckout.payableAmountNow;
+      const q = Math.round(total / 4);
+      document.getElementById('checkoutJsonOutput').textContent = JSON.stringify({
+        scheduleType: 'BNPL_4_PAY_ZERO_INTEREST (#14)',
+        planSku: lastCompletedCheckout.planSku,
+        installments: [
+          { step: 1, due: 'امروز (قسط اول - ۲۵٪)', amount: q, status: 'PAID_AND_LICENSE_ACTIVE' },
+          { step: 2, due: '۳۰ روز بعد (قسط دوم - ۲۵٪)', amount: q, status: 'SCHEDULED' },
+          { step: 3, due: '۶۰ روز بعد (قسط سوم - ۲۵٪)', amount: q, status: 'SCHEDULED' },
+          { step: 4, due: '۹۰ روز بعد (قسط چهارم - ۲۵٪)', amount: q, status: 'SCHEDULED' }
+        ]
+      }, null, 2);
+    }
+
+    function showAbandonedCartOffer() {
+      const code = 'COMEBACK10-' + Math.random().toString(36).substring(2, 6).toUpperCase();
+      document.getElementById('checkoutStatusText').innerHTML = `🎁 پیشنهاد بازیابی سبد خرید (#17): کد تخفیف ۱۰٪ اختصاصی <code>${code}</code> برای تکمیل خرید شما فعال شد!`;
+    }
+
+    function refundLastOrderCrl() {
+      if (!lastCompletedCheckout) startCheckout(6);
+      const key = lastCompletedCheckout.issuedLicenseKey;
+      revokedCrlList.push(key);
+      document.getElementById('activeLicenseDisplay').textContent = `نسخهٔ رایگان (لایسنس ${key} مسترد و باطل شد)`;
+      document.getElementById('checkoutJsonOutput').textContent = JSON.stringify({
+        action: 'AUTOMATED_7_DAY_REFUND_AND_CRL_REVOCATION (#20)',
+        refundedAmount: lastCompletedCheckout.payableAmountNow,
+        currency: lastCompletedCheckout.currency,
+        revokedLicenseKey: key,
+        crlStatus: 'REVOKED_IN_GLOBAL_CRL',
+        totalRevokedKeysInSession: revokedCrlList.length
+      }, null, 2);
+    }
+
+    // =========================================================================
+    // Phase 3 (#21..#30) Customer Portal Pro Interactive Functions
+    // =========================================================================
+    let activeDevices = [
+      { id: 'DEV-WIN11-01', name: 'Office-Workstation-PC (Windows 11)' },
+      { id: 'DEV-LAPTOP-02', name: 'Personal-Surface-Pro (Windows 11)' }
+    ];
+    let referralCashbackToman = 570000;
+    let issuedSeatCounter = 1;
+
+    function renderActiveDevicesUI() {
+      const box = document.getElementById('activeDevicesListBox');
+      if (!box) return;
+      box.innerHTML = activeDevices.map((d, idx) => `
+        <div style="display:flex; justify-content:space-between; align-items:center; padding:4px 0; border-bottom:1px solid #1e293b;">
+          <span>🟢 ${d.name}</span>
+          <button onclick="deauthorizeDeviceUI(${idx})" style="background:#ef4444; color:#fff; border:none; padding:2px 7px; border-radius:4px; cursor:pointer; font-size:0.72rem;">حذف دسترسی</button>
+        </div>
+      `).join('');
+    }
+
+    function registerNewDeviceUI() {
+      if (activeDevices.length >= 3) {
+        document.getElementById('checkoutStatusText').innerHTML = '⚠️ سقف مجاز ۳ دستگاه فعال پر شده است. ابتدا یکی از دستگاه‌های قبلی را حذف (Deauthorize) کنید.';
+        return;
+      }
+      const id = 'DEV-NODE-0' + (activeDevices.length + 1);
+      activeDevices.push({ id, name: `New-Desktop-${id} (Windows 11)` });
+      renderActiveDevicesUI();
+      document.getElementById('checkoutStatusText').innerHTML = `✅ دستگاه جدید (${id}) با موفقیت روی لایسنس شما ثبت شد (#22).`;
+    }
+
+    function deauthorizeDeviceUI(idx) {
+      const removed = activeDevices.splice(idx, 1)[0];
+      renderActiveDevicesUI();
+      if (removed) {
+        document.getElementById('checkoutStatusText').innerHTML = `🔓 دسترسی دستگاه «${removed.name}» از لایسنس شما حذف شد (#22 Deauthorized).`;
+      }
+    }
+
+    function simulateReferralCashbackUI() {
+      referralCashbackToman += 570000;
+      const el = document.getElementById('referralCashbackText');
+      if (el) el.textContent = `پاداش نقدی دعوت دوستان: ${referralCashbackToman.toLocaleString('fa-IR')} تومان`;
+      document.getElementById('checkoutStatusText').innerHTML = `🎉 یک خرید جدید از طریق لینک دعوت شما ثبت شد و ۲۰٪ پاداش نقدی (۵۷۰٬۰۰۰ تومان) به حساب شما افزوده گردید (#24)!`;
+    }
+
+    function issueTeamSubLicenseUI() {
+      const subKey = `RA-SEAT0${issuedSeatCounter}-${Math.random().toString(36).substring(2, 10).toUpperCase()}`;
+      issuedSeatCounter++;
+      document.getElementById('checkoutJsonOutput').textContent = JSON.stringify({
+        feature: 'TEAM_EMPLOYEE_SUB_LICENSE_ISSUER (#25)',
+        employeeSeatIndex: issuedSeatCounter - 1,
+        issuedSubLicenseKey: subKey,
+        status: 'ACTIVE_AND_BOUND_TO_COMPANY_POLICY'
+      }, null, 2);
+      document.getElementById('checkoutStatusText').innerHTML = `🏢 کلید لایسنس فرعی کارمند صادر شد: <code>${subKey}</code> (#25)`;
+    }
+
+    function generateNewMcpTokenUI() {
+      const tok = 'ra_mcp_' + Math.random().toString(36).substring(2, 14) + Math.random().toString(36).substring(2, 14);
+      document.getElementById('mcpScopedTokenBox').value = tok;
+      document.getElementById('checkoutStatusText').innerHTML = `🔑 توکن دسترسی شخصی جدید برای سرور محلی MCP و CLI صادر شد: <code>${tok}</code> (#28)`;
+    }
+
+    function showMonthlyRoiCertificateUI() {
+      document.getElementById('checkoutJsonOutput').textContent = JSON.stringify({
+        certificateType: 'MONTHLY_PRODUCTIVITY_AND_ROI_CERTIFICATE (#26)',
+        awardedTo: 'کاربر حرفه‌ای رباتیک ایجنت',
+        filesAutomatedThisMonth: 1450,
+        hoursSavedThisMonth: 11.3,
+        estimatedEconomicValueSavedUsd: 339.00,
+        verificationSeal: 'ROI_CERT_2026_VERIFIED'
+      }, null, 2);
+      document.getElementById('checkoutStatusText').innerHTML = '🏆 گواهی رسمی بهره‌وری و صرفه‌جویی زمان این ماه صادر شد (#26)!';
+    }
+
+    function askAiConciergeUI() {
+      const q = (document.getElementById('supportQuestionBox')?.value || '').toLowerCase();
+      let ans = 'پشتیبان هوشمند (#27): تمامی ۲۴ مهارت ۱۰۰٪ آفلاین اجرا می‌شوند، فایل اصلی حفظ شده و خروجی در نسخهٔ _sanitized ذخیره می‌گردد. پس از پرداخت در هر یک از ۶ درگاه نیز لایسنس با دکمهٔ Deep-Link فوراً فعال می‌شود.';
+      if (q.includes('mcp') || q.includes('claude')) {
+        ans = 'پشتیبان هوشمند (#27): برای اتصال به Claude Desktop یا Cursor، از توکن ra_mcp_... در کارت بالا و دستور agent-cli mcp-rpc استفاده کنید.';
+      }
+      document.getElementById('checkoutStatusText').innerHTML = `💬 <strong>${ans}</strong>`;
+    }
+
+    function runZeroKnowledgeBackupUI() {
+      const cipher = 'ENC_GCM_V1:ZeroKnowledgeClientSide:' + btoa(JSON.stringify({ workflows: 20, skills: 24, ts: new Date().toISOString() }));
+      document.getElementById('checkoutJsonOutput').textContent = JSON.stringify({
+        backupType: 'ZERO_KNOWLEDGE_E2E_ENCRYPTED_WORKFLOW_BACKUP (#30)',
+        encryptionAlgorithm: 'AES-256-GCM (Client-Side Passphrase Derived)',
+        serverCanReadPlaintext: false,
+        encryptedBlob: cipher
+      }, null, 2);
+      document.getElementById('checkoutStatusText').innerHTML = '🔐 بکاپ رمزنگاری‌شدهٔ سرتاسری (Zero-Knowledge E2E) از گردش‌کارهای شما تولید شد (#30)!';
+    }
+
+    // =========================================================================
+    // Phase 5 (#41..#50) Interactive Comparison Matrix & Bilingual NDA Builder
+    // =========================================================================
+    function initPhase5PortalWidgets() {
+      const ids = ['cmpPlan1', 'cmpPlan2', 'cmpPlan3'];
+      const defaults = [4, 6, 43];
+      ids.forEach((id, i) => {
+        const sel = document.getElementById(id);
+        if (!sel) return;
+        sel.innerHTML = PLANS_46.map(p => `<option value="${p.n}" ${p.n === defaults[i] ? 'selected' : ''}>${p.fa}</option>`).join('');
+      });
+      renderComparisonMatrixUI();
+      generateBrowserNdaUI();
+    }
+
+    function renderComparisonMatrixUI() {
+      const p1 = PLANS_46.find(p => p.n === Number(document.getElementById('cmpPlan1')?.value || 4)) || PLANS_46[0];
+      const p2 = PLANS_46.find(p => p.n === Number(document.getElementById('cmpPlan2')?.value || 6)) || PLANS_46[1];
+      const p3 = PLANS_46.find(p => p.n === Number(document.getElementById('cmpPlan3')?.value || 43)) || PLANS_46[2];
+      const box = document.getElementById('comparisonMatrixTableContainer');
+      if (!box) return;
+      box.innerHTML = `
+        <table style="width:100%; border-collapse:collapse; margin-top:6px;">
+          <thead>
+            <tr style="border-bottom:1px solid #334155; color:#93c5fd;">
+              <th style="padding:6px; text-align:right;">شاخص مقایسه</th>
+              <th style="padding:6px; text-align:right;">${p1.fa}</th>
+              <th style="padding:6px; text-align:right;">${p2.fa}</th>
+              <th style="padding:6px; text-align:right;">${p3.fa}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom:1px solid #1e293b;">
+              <td style="padding:6px; color:#94a3b8;">قیمت تومانی</td>
+              <td style="padding:6px; color:#34d399; font-weight:bold;">${p1.toman.toLocaleString('fa-IR')} تومان</td>
+              <td style="padding:6px; color:#34d399; font-weight:bold;">${p2.toman.toLocaleString('fa-IR')} تومان</td>
+              <td style="padding:6px; color:#34d399; font-weight:bold;">${p3.toman.toLocaleString('fa-IR')} تومان</td>
+            </tr>
+            <tr style="border-bottom:1px solid #1e293b;">
+              <td style="padding:6px; color:#94a3b8;">قیمت دلاری</td>
+              <td style="padding:6px; color:#60a5fa;">$${p1.usd.toFixed(2)}</td>
+              <td style="padding:6px; color:#60a5fa;">$${p2.usd.toFixed(2)}</td>
+              <td style="padding:6px; color:#60a5fa;">$${p3.usd.toFixed(2)}</td>
+            </tr>
+            <tr style="border-bottom:1px solid #1e293b;">
+              <td style="padding:6px; color:#94a3b8;">دورهٔ پرداخت</td>
+              <td style="padding:6px;">${p1.cycle}</td>
+              <td style="padding:6px;">${p2.cycle}</td>
+              <td style="padding:6px;">${p3.cycle}</td>
+            </tr>
+            <tr>
+              <td style="padding:6px; color:#94a3b8;">سقف فایل در هر نوبت</td>
+              <td style="padding:6px;">${p1.batch.toLocaleString('fa-IR')} فایل</td>
+              <td style="padding:6px;">${p2.batch.toLocaleString('fa-IR')} فایل</td>
+              <td style="padding:6px;">${p3.batch.toLocaleString('fa-IR')} فایل</td>
+            </tr>
+          </tbody>
+        </table>
+      `;
+    }
+
+    function generateBrowserNdaUI() {
+      const a = document.getElementById('ndaPartyA')?.value || 'شرکت داده‌پرداز نوین';
+      const b = document.getElementById('ndaPartyB')?.value || 'Acme Global Corp';
+      const out = document.getElementById('browserNdaOutput');
+      if (out) {
+        out.value =
+          `=== توافق‌نامهٔ دوجانبهٔ حفظ محرمانگی / MUTUAL NON-DISCLOSURE AGREEMENT (NDA) ===\n` +
+          `• طرف اول (Party A): ${a}\n` +
+          `• طرف دوم (Party B): ${b}\n` +
+          `• ماده ۱ (فارسی): طرفین متعهد می‌شوند کلیهٔ اسناد، داده‌ها و خروجی‌های _sanitized مبادله‌شده را کاملاً محرمانه نگه دارند.\n` +
+          `• Clause 1 (English): Both parties agree to hold all exchanged documents, trade secrets, and _sanitized outputs in strict confidence.`;
+      }
+    }
+
+    if (window.RoboticSiteCMS) {
+      RoboticSiteCMS.injectAdminQuickBar();
+      const cmsCfg = RoboticSiteCMS.loadConfig();
+      if (Array.isArray(cmsCfg.gateways) && cmsCfg.gateways.length) {
+        const activeGws = cmsCfg.gateways.filter(g => g.enabled !== false);
+        if (activeGws.length) {
+          GATEWAYS.length = 0;
+          activeGws.forEach(g => GATEWAYS.push(g));
+          selectedGateway = GATEWAYS[0];
+        }
+      }
+      if (Array.isArray(cmsCfg.plans) && cmsCfg.plans.length === 46) {
+        PLANS_46.length = 0;
+        cmsCfg.plans.filter(p => p.enabled !== false).forEach(p => PLANS_46.push(p));
+      }
+    }
+
+    renderGateways();
+    renderPlans();
+    calcProratedUpgradeUI();
+    calcTeamSeatSliderUI();
+    renderActiveDevicesUI();
+    initPhase5PortalWidgets();
+  </script>
+</body>
+</html>

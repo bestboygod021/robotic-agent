@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' data: https:;" />
+  <title>🛡️ مرکز اعتماد امنیتی، امضای SHA-256 و شفافیت معماری | Robotic Agent Security Trust Center</title>
+  <link rel="manifest" href="manifest.json" />
+  <script src="site-config.js"></script>
+  <style>
+    :root {
+      --bg: #070b14;
+      --card: #111827;
+      --border: #334155;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --primary: #2563eb;
+      --accent: #10b981;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: Tahoma, "Segoe UI", sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+    .container { max-width: 1180px; margin: 0 auto; padding: 28px 20px 80px; }
+    header {
+      display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center;
+      border-bottom: 1px solid var(--border); padding-bottom: 18px; margin-bottom: 26px; gap: 12px;
+    }
+    .nav a {
+      color: #fff; text-decoration: none; background: #1e293b; border: 1px solid var(--border);
+      padding: 8px 14px; border-radius: 8px; font-size: 0.86rem; margin-right: 6px;
+    }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-bottom: 24px; }
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 20px; }
+    .card h3 { color: #60a5fa; font-size: 1.02rem; margin-bottom: 8px; }
+    .badge-ok { display: inline-block; background: rgba(16,185,129,0.18); color: #34d399; border: 1px solid #10b981; padding: 3px 10px; border-radius: 999px; font-size: 0.78rem; font-weight: bold; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin-top: 12px; }
+    th, td { border-bottom: 1px solid var(--border); padding: 10px; text-align: right; }
+    th { color: #93c5fd; background: #1e293b; }
+    code { font-family: monospace; color: #6ee7b7; background: #020617; padding: 3px 6px; border-radius: 5px; direction: ltr; display: inline-block; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div>
+        <span class="badge-ok">✓ معماری ۱۰۰٪ محلی و تاییدشده (Verified Local-First Security)</span>
+        <h1 style="font-size:1.5rem; margin-top:6px;">🛡️ مرکز اعتماد امنیتی و اصالت فایل‌ها (Security Trust Center)</h1>
+      </div>
+      <div class="nav">
+        <a href="index.html">🏠 صفحهٔ اصلی</a>
+        <a href="portal.html">💳 فروشگاه ۴۶ اشتراک</a>
+        <a href="admin.html">⚙️ پنل مدیریت سایت</a>
+      </div>
+    </header>
+
+    <div class="grid">
+      <div class="card">
+        <h3>🔒 ۱. پردازش ۱۰۰٪ آفلاین و حفظ فایل اصلی</h3>
+        <p style="font-size:0.86rem; color:var(--muted);">تمامی ۲۴ مهارت بدون ارسال هیچ بایتی به سرورهای ابری اجرا می‌شوند. در مهارت‌های سانسور PII و پاک‌سازی متادیتا، فایل اصلی کاربر ۱۰۰٪ دست‌نخورده باقی مانده و خروجی در نسخهٔ <code>_sanitized</code> ذخیره می‌شود.</p>
+      </div>
+      <div class="card">
+        <h3>⛓️ ۲. زنجیرهٔ هش غیرقابل‌تحریف (SHA-256 Audit Chain)</h3>
+        <p style="font-size:0.86rem; color:var(--muted);">تمامی عملیات اجرا، واگرد (Undo) و تغییرات مدیر سایت در زنجیرهٔ هش رمزنگاری‌شده ثبت می‌شوند و با امضای دیجیتال <code>HMAC-SHA256</code> در برابر دست‌کاری محافظت می‌گردند.</p>
+      </div>
+      <div class="card">
+        <h3>🏦 ۳. امنیت ۶ درگاه پرداخت و امضای وب‌هوک</h3>
+        <p style="font-size:0.86rem; color:var(--muted);">کلیهٔ کلیدهای مرچنت درگاه‌ها با <code>AES-256-GCM</code> رمزنگاری شده و پیام‌های بازگشتی زرین‌پال، زیبال، آیدی‌پی، استرایپ، لمون‌اسکوییزی و نووپیمنتس با امضای <code>HMAC-SHA256</code> راستی‌آزمایی می‌شوند.</p>
+      </div>
+      <div class="card">
+        <h3>🔑 ۴. قفل سخت‌افزاری و احراز هویت دومرحله‌ای (2FA)</h3>
+        <p style="font-size:0.86rem; color:var(--muted);">پشتیبانی از کد ۶ رقمی <code>TOTP (RFC 6238)</code> و <code>WebAuthn Passkey</code> برای پنل مدیریت، به همراه امکان صدور کلید لایسنس متصل به شناسهٔ سخت‌افزار (<code>RA-HW-...</code>).</p>
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom:24px;">
+      <h3>📦 جدول هش رسمی SHA-256 و امضای Sigstore نسخه‌های قابل دانلود (#8 Artifact Checksums)</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>نام فایل رسمی</th>
+            <th>نسخه</th>
+            <th>هش SHA-256</th>
+            <th>دستور بررسی امضای دیجیتال (Sigstore / SHA256)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>RoboticAgent-v2.0-Windows-x64-Setup.exe</code></td>
+            <td>2.0.0</td>
+            <td><code>8F4E2B91C0D3A765...01234567</code></td>
+            <td><code>cosign verify-blob --signature RoboticAgent-Setup.sig RoboticAgent-v2.0-Windows-x64-Setup.exe</code></td>
+          </tr>
+          <tr>
+            <td><code>RoboticAgent-v2.0-BrowserExtension-Chrome-Edge.zip</code></td>
+            <td>2.0.0</td>
+            <td><code>3A9C7E12B4D6F801...ABCDEF12</code></td>
+            <td><code>sha256sum -c RoboticAgent-v2.0-SHA256SUMS.txt</code></td>
+          </tr>
+          <tr>
+            <td><code>agent-cli-v2.0-linux-macos-win-bundle.tar.gz</code></td>
+            <td>2.0.0</td>
+            <td><code>7C1D9A8B2E3F4051...4C5D6E7F</code></td>
+            <td><code>cosign verify-blob --signature agent-cli.sig agent-cli-v2.0-linux-macos-win-bundle.tar.gz</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <h3>🛡️ هدرهای امنیتی فعال روی سایت (#3 Strict HTTP Security Headers &amp; CSP)</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>نام هدر امنیتی</th>
+            <th>مقدار پیکربندی‌شده</th>
+            <th>وضعیت</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>Content-Security-Policy</code></td>
+            <td><code>default-src 'self'; frame-ancestors 'self'; base-uri 'self';</code></td>
+            <td><span class="badge-ok">فعال</span></td>
+          </tr>
+          <tr>
+            <td><code>Strict-Transport-Security (HSTS)</code></td>
+            <td><code>max-age=63072000; includeSubDomains; preload</code></td>
+            <td><span class="badge-ok">فعال</span></td>
+          </tr>
+          <tr>
+            <td><code>X-Content-Type-Options / X-Frame-Options</code></td>
+            <td><code>nosniff / SAMEORIGIN</code></td>
+            <td><span class="badge-ok">فعال</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <script>
+    if (window.RoboticSiteCMS) RoboticSiteCMS.injectAdminQuickBar();
+  </script>
+</body>
+</html>

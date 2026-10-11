@@ -12,4 +12,5 @@ public sealed record IntentParseResult(
     string? Extension,
     string Message,
     double Confidence = 0,
-    bool Inferred = false);
+    bool Inferred = false,
+    FileFilterCriteria? FilterCriteria = null);

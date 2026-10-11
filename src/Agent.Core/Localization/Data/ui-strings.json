@@ -1,0 +1,162 @@
+{
+  "app.title": {
+    "fa": "رباتیک ایجنت — دستیار هوشمند و امن دسکتاپ",
+    "en": "Robotic Agent — Safe Local Desktop Assistant",
+    "zh": "Robotic Agent — 安全本地桌面助手",
+    "es": "Robotic Agent — Asistente de Escritorio Local y Seguro",
+    "ar": "روبتيك إيجنت — المساعد المكتبي المحلي الآمن",
+    "fr": "Robotic Agent — Assistant de Bureau Local et Sécurisé"
+  },
+  "app.subtitle": {
+    "fa": "خودکارسازی محلی با پیش‌نمایش اجباری، کنترل منابع سخت‌افزار و تأیید انسانی",
+    "en": "Local-first automation with mandatory preview, hardware budget control, and human approval",
+    "zh": "本地优先自动化，具备强制预览、硬件资源预算控制与人工确认",
+    "es": "Automatización local con vista previa obligatoria, control de recursos y aprobación humana",
+    "ar": "أتمتة محلية أولاً مع معاينة إلزامية، وضبط موارد العتاد، وموافقة المستخدم",
+    "fr": "Automatisation locale avec aperçu obligatoire, contrôle des ressources et validation humaine"
+  },
+  "app.languageLabel": {
+    "fa": "زبان رابط:",
+    "en": "Language:",
+    "zh": "界面语言：",
+    "es": "Idioma:",
+    "ar": "اللغة:",
+    "fr": "Langue :"
+  },
+  "app.openAiCatalogButton": {
+    "fa": "کاتالوگ ابزارهای AI (۲۰۰ ابزار)",
+    "en": "AI Tools Hub (200 Tools)",
+    "zh": "AI 工具中心（200 款工具）",
+    "es": "Catálogo de Herramientas IA (200)",
+    "ar": "دليل أدوات الذكاء الاصطناعي (200 أداة)",
+    "fr": "Catalogue d’Outils IA (200 outils)"
+  },
+  "catalog.windowTitle": {
+    "fa": "هاب هوشمند ابزارهای هوش مصنوعی (۲۰۰ ابزار در ۸ دسته)",
+    "en": "Smart AI Tools Hub (200 Curated Tools in 8 Categories)",
+    "zh": "智能 AI 工具中心（8 大类别 200 款精选工具）",
+    "es": "Centro Inteligente de Herramientas IA (200 herramientas en 8 categorías)",
+    "ar": "المركز الذكي لأدوات الذكاء الاصطناعي (200 أداة في 8 فئات)",
+    "fr": "Hub Intelligent d’Outils IA (200 outils dans 8 catégories)"
+  },
+  "catalog.headerSubtitle": {
+    "fa": "۲۰۰ ابزار منتخب در ۸ دسته (۲۵ ابزار در هر دسته)؛ توصیه‌گر هوشمند، مقایسهٔ رودررو، پرامپت آماده و پیوند مستقیم",
+    "en": "200 tools across 8 categories (25 per category); smart matchmaker, side-by-side comparison, starter prompts & direct links",
+    "zh": "8 大分类共 200 款工具（每类 25 款）；智能推荐、并排对比、提示词模板与直达链接",
+    "es": "200 herramientas en 8 categorías (25 por categoría); recomendador inteligente, comparación, plantillas y enlaces directos",
+    "ar": "200 أداة في 8 فئات (25 لكل فئة)؛ توصية ذكية، مقارنة شاملة، قوالب جاهزة وروابط مباشرة",
+    "fr": "200 outils en 8 catégories (25 par catégorie) ; recommandation intelligente, comparaison, prompts prêts et liens directs"
+  },
+  "catalog.offlineBadge": {
+    "fa": "کاتالوگ آفلاین؛ بدون ارسال خودکار داده",
+    "en": "Offline Catalog • Zero Auto-Telemetry",
+    "zh": "离线目录 • 零自动数据上传",
+    "es": "Catálogo sin conexión • Cero telemetría",
+    "ar": "دليل دون اتصال • لا إرسال تلقائي للبيانات",
+    "fr": "Catalogue hors-ligne • Zéro télémétrie"
+  },
+  "catalog.searchLabel": {
+    "fa": "جست‌وجو",
+    "en": "Search",
+    "zh": "搜索",
+    "es": "Buscar",
+    "ar": "بحث",
+    "fr": "Rechercher"
+  },
+  "catalog.matchmakerPlaceholder": {
+    "fa": "مشکل یا نیازتان را بنویسید تا بهترین ابزار پیشنهاد شود (مثلاً: حذف نویز صدا و تبدیل جلسه به متن)...",
+    "en": "Describe your task to get top tool recommendations (e.g., clean audio noise and transcribe meeting)...",
+    "zh": "输入您的需求以获取最佳工具推荐（例如：去除音频噪音并转写会议记录）...",
+    "es": "Describa su necesidad para recibir recomendaciones (ej. limpiar ruido de audio y transcribir reunión)...",
+    "ar": "اكتب مشكلتك أو حاجتك لاقتراح أفضل أداة (مثال: إزالة ضوضاء الصوت وتحويل الاجتماع إلى نص)...",
+    "fr": "Décrivez votre besoin pour obtenir des recommandations (ex. nettoyer l’audio et transcrire une réunion)..."
+  },
+  "catalog.matchmakerButton": {
+    "fa": "پیشنهاد هوشمند ابزار",
+    "en": "Recommend Tools",
+    "zh": "智能推荐",
+    "es": "Recomendar",
+    "ar": "اقتراح ذكي",
+    "fr": "Recommander"
+  },
+  "catalog.clearMatchmakerButton": {
+    "fa": "نمایش همه",
+    "en": "Show All",
+    "zh": "显示全部",
+    "es": "Mostrar todo",
+    "ar": "عرض الكل",
+    "fr": "Tout afficher"
+  },
+  "catalog.compareButton": {
+    "fa": "مقایسهٔ ابزارهای انتخاب‌شده",
+    "en": "Compare Selected",
+    "zh": "对比所选工具",
+    "es": "Comparar seleccionados",
+    "ar": "مقارنة الأدوات المحددة",
+    "fr": "Comparer la sélection"
+  },
+  "catalog.favoritesOnly": {
+    "fa": "فقط ستاره‌دارها",
+    "en": "Favorites Only",
+    "zh": "仅看收藏",
+    "es": "Solo favoritos",
+    "ar": "المفضلة فقط",
+    "fr": "Favoris uniquement"
+  },
+  "catalog.freeTierOnly": {
+    "fa": "دارای پلن رایگان",
+    "en": "Free Tier Available",
+    "zh": "提供免费版",
+    "es": "Con plan gratuito",
+    "ar": "يتضمن خطة مجانية",
+    "fr": "Offre gratuite disponible"
+  },
+  "catalog.openWorkspace": {
+    "fa": "ورود به ابزار ↗",
+    "en": "Open Tool ↗",
+    "zh": "打开工具 ↗",
+    "es": "Abrir herramienta ↗",
+    "ar": "فتح الأداة ↗",
+    "fr": "Ouvrir l’outil ↗"
+  },
+  "catalog.copyPrompt": {
+    "fa": "کپی پرامپت نمونه",
+    "en": "Copy Starter Prompt",
+    "zh": "复制示例提示词",
+    "es": "Copiar prompt base",
+    "ar": "نسخ موجه جاهز",
+    "fr": "Copier le prompt"
+  },
+  "catalog.prepHandoff": {
+    "fa": "آماده‌سازی امن + ورود",
+    "en": "Safe Prep + Open",
+    "zh": "安全脱敏并打开",
+    "es": "Preparar seguro + Abrir",
+    "ar": "تجهيز آمن + فتح",
+    "fr": "Préparer + Ouvrir"
+  },
+  "catalog.allCategories": {
+    "fa": "همهٔ دسته‌ها",
+    "en": "All Categories",
+    "zh": "所有类别",
+    "es": "Todas las categorías",
+    "ar": "جميع الفئات",
+    "fr": "Toutes les catégories"
+  },
+  "catalog.emptyState": {
+    "fa": "ابزاری با این فیلتر پیدا نشد.",
+    "en": "No tools matched your current filter.",
+    "zh": "未找到符合当前筛选条件的工具。",
+    "es": "No se encontraron herramientas con este filtro.",
+    "ar": "لم يتم العثور على أداة تطابق هذا المرشح.",
+    "fr": "Aucun outil ne correspond à ce filtre."
+  },
+  "catalog.footerDisclaimer": {
+    "fa": "آیکون‌ها نشان‌های حروفی و برداری محلی‌اند، نه لوگوی رسمی. با انتخاب دکمهٔ بازکردن، مرورگر پیش‌فرض شما وب‌سایت ابزار را باز می‌کند و هیچ داده‌ای خودکار ارسال نمی‌شود.",
+    "en": "Icons are local typographic/vector badges, not official brand logos. Clicking Open launches your default browser; no user data is transmitted automatically.",
+    "zh": "图标为本地字母与矢量标识，非官方品牌标志。点击打开仅在系统默认浏览器中访问链接，不会自动发送任何数据。",
+    "es": "Los iconos son insignias locales, no logotipos oficiales. Al abrir, se utiliza su navegador predeterminado sin enviar datos automáticamente.",
+    "ar": "الأيقونات شارات حرفية محلية وليست شعارات رسمية. عند النقر، يفتح متصفحك الافتراضي الموقع دون إرسال أي بيانات تلقائياً.",
+    "fr": "Les icônes sont des badges locaux et non des logos officiels. L’ouverture utilise votre navigateur par défaut sans transmission automatique de données."
+  }
+}

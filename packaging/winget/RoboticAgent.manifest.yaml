@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=https://aka.ms/winget-manifest.singleton.1.6.0.schema.json
+PackageIdentifier: RoboticAgent.Desktop
+PackageVersion: 2.0.0
+PackageLocale: fa-IR
+Publisher: RoboticAgent
+PackageName: Robotic Agent — دستیار هوشمند محلی و بین‌المللی
+License: MIT
+ShortDescription: دستیار دسکتاپ ۶زبانه (محلی و ترکیبی) با ۲۰ مهارت فایل/سند، ۲۰ قالب شغلی و هاب ۲۰۰ ابزار هوش مصنوعی
+Tags:
+  - automation
+  - local-first
+  - ai-tools
+  - pdf
+  - privacy
+  - workflow
+Installers:
+  - Architecture: x64
+    InstallerType: msix
+    InstallerUrl: https://github.com/bestboygod021/robotic-agent/releases/download/v2.0.0/RoboticAgent-x64.msix
+    InstallerSha256: 0000000000000000000000000000000000000000000000000000000000000000
+ManifestType: singleton
+ManifestVersion: 1.6.0
